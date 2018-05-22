@@ -14,16 +14,16 @@ typedef struct Processo{
 }Processo;
 
 typedef struct TipoFila{
-    Processo* processo;
-    struct TipoFila* prox;
+    Processo *processo;
+    struct TipoFila *prox;
 }TF;
 
 Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, int cds);
-void mata_processo(Processo* p);
+void mata_processo(Processo *processo);
 TF* cria_fila();
-TF* cria_elem(Processo* p);
-TF* ins_proc_ord(TF* f, Processo* p);
-void imprime_fila(TF* f);
-void libera_fila(TF *f);
+TF* cria_elem(Processo *processo);
+TF* ins_proc_ord(TF *fila, Processo *processo);
+void imprime_fila(TF *fila);
+void libera_fila(TF *fila);
 
 #endif

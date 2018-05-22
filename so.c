@@ -15,8 +15,8 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     return processo;
 }
 
-void mata_processo(Processo* p){
-    free(p);
+void mata_processo(Processo *processo){
+    free(processo);
     return;
 }
 
@@ -24,36 +24,36 @@ TF* cria_fila(){
     return NULL;
 }
 
-TF* cria_elem(Processo* p){
+TF* cria_elemento(Processo* processo){
     TF* novo = (TF*)malloc(sizeof(TF));
     novo->prox = NULL;
-    novo->processo = p;
+    novo->processo = processo;
     return novo;
 }
 
-TF* ins_proc_ord(TF* f, Processo* p){
-    if(!f){
-        return cria_elem(p);
+TF* ins_proc_ord(TF* fila, Processo* processo){
+    if(!fila){
+        return cria_elemento(processo);
     }
     else{
         TF* g;
-        TF* novo = cria_elem(p);
-        if(g->processo->tempo_de_chegada > p->tempo_de_chegada 
-        || g->processo->tempo_de_chegada == p->tempo_de_chegada && g->processo->prioridade > p->prioridade){
-            novo->prox = f;
+        TF* novo = cria_elemento(processo);
+        if(g->processo->tempo_de_chegada > processo->tempo_de_chegada
+        || g->processo->tempo_de_chegada == processo->tempo_de_chegada && g->processo->prioridade > processo->prioridade){
+            novo->prox = fila;
             return novo;
         }else{
             TF* frente = g->prox;
-            while(g->processo->tempo_de_chegada > p->tempo_de_chegada){
+            while(g->processo->tempo_de_chegada > processo->tempo_de_chegada){
                 if(!frente){
                     g->prox = novo;
-                    return f;
+                    return fila;
                 }
                 g = g->prox;
                 frente = g->prox;
             }
             g->prox = novo;
-            return f;
+            return fila;
         }
     }
 }
@@ -75,7 +75,6 @@ void libera_fila(TF *f){
             proxNo = atual->prox;
             free(atual);
             atual = proxNo;
-
         }
     }
 }
