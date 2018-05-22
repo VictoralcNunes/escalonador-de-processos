@@ -32,27 +32,32 @@ TF* cria_elemento(Processo* processo){
 }
 
 TF* ins_proc_ord(TF* fila, Processo* processo){
-    if(!fila){
+    if(!fila){ //se a fila está vazia
         return cria_elemento(processo);
     }
     else{
-        TF* g;
+        TF* g = fila;
         TF* novo = cria_elemento(processo);
+        
         if(g->processo->tempo_de_chegada > processo->tempo_de_chegada
-        || g->processo->tempo_de_chegada == processo->tempo_de_chegada && g->processo->prioridade > processo->prioridade){
+        || g->processo->tempo_de_chegada == processo->tempo_de_chegada 
+            && g->processo->prioridade > processo->prioridade){ // se o processo deve ser o primeiro da fila
             novo->prox = fila;
             return novo;
         }else{
             TF* frente = g->prox;
-            while(g->processo->tempo_de_chegada > processo->tempo_de_chegada){
-                if(!frente){
+            while(frente){
+                if(frente->processo->tempo_de_chegada > processo->tempo_de_chegada
+                || (frente->processo->tempo_de_chegada == processo->tempo_de_chegada 
+                && frente->processo->prioridade > processo->prioridade)){ // se o processo está no meio da fila
                     g->prox = novo;
+                    novo->prox = frente;    
                     return fila;
                 }
                 g = g->prox;
                 frente = g->prox;
             }
-            g->prox = novo;
+            g->prox = novo; // se o processo é o último
             return fila;
         }
     }
