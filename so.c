@@ -38,9 +38,9 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
     else{
         TF* g = fila;
         TF* novo = cria_elemento(processo);
-        
+
         if(g->processo->tempo_de_chegada > processo->tempo_de_chegada
-        || g->processo->tempo_de_chegada == processo->tempo_de_chegada 
+        || g->processo->tempo_de_chegada == processo->tempo_de_chegada
             && g->processo->prioridade > processo->prioridade){ // se o processo deve ser o primeiro da fila
             novo->prox = fila;
             return novo;
@@ -48,10 +48,10 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
             TF* frente = g->prox;
             while(frente){
                 if(frente->processo->tempo_de_chegada > processo->tempo_de_chegada
-                || (frente->processo->tempo_de_chegada == processo->tempo_de_chegada 
+                || (frente->processo->tempo_de_chegada == processo->tempo_de_chegada
                 && frente->processo->prioridade > processo->prioridade)){ // se o processo está no meio da fila
                     g->prox = novo;
-                    novo->prox = frente;    
+                    novo->prox = frente;
                     return fila;
                 }
                 g = g->prox;
@@ -63,18 +63,18 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
     }
 }
 
-void imprime_fila(TF* f){
-    if(!f){
+void imprime_fila(TF* fila){
+    if(!fila){
         printf("fim\n");
     }else{
-        printf("Processo %d -> ", f->processo->numero);
-        imprime_fila(f->prox);
+        printf("Processo %d -> ", fila->processo->numero);
+        imprime_fila(fila->prox);
     }
 }
-void libera_fila(TF *f){
-    if (!f){
+void libera_fila(TF *fila){
+    if (!fila){
         TF *proxNo, *atual;
-        atual = f->prox;
+        atual = fila->prox;
 
         while (!atual){
             proxNo = atual->prox;
@@ -84,33 +84,25 @@ void libera_fila(TF *f){
     }
 }
 
-TF *armazena(TF *fila, FILE *file){
-    int numproc =0;
+TF *armazena(TF *fila, char *str){
+    int numproc = 0;
     Processo *processo = NULL;
+
+    FILE *file;
+    file = fopen(str,"r");
     while (!feof(file)){
         processo = cria_processo(0,0,0,0,0,0,0,0);
-        processo->numero = numproc; 
-        fscanf(file, "%d, %d, %d, %d, %d, %d, %d, %d ", 
-            &processo->tempo_de_chegada, 
-            &processo->prioridade, 
+        processo->numero = numproc;
+        fscanf(file, "%d, %d, %d, %d, %d, %d, %d, %d ",
+            &processo->tempo_de_chegada,
+            &processo->prioridade,
             &processo->tempo_de_processador,
             &processo->memoria,
             &processo->impressoras,
             &processo->scanners,
             &processo->modens,
             &processo->cds);
-        fila = ins_proc_ord(fila,processo);
-        // printf("Processo %d: %d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t\n", 
-        //  processo->numero,
-        //  processo->tempo_de_chegada, 
-        //  processo->prioridade, 
-        //  processo->tempo_de_processador,
-        //  processo->memoria,
-        //  processo->impressoras,
-        //  processo->scanners,
-        //  processo->modens,
-        //  processo->cds);
-        // //free(processo);
+        fila = ins_proc_ord(fila, processo);
         numproc++;
     }
     fclose(file);

@@ -43,6 +43,6 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
-TF *armazena(TF *fila, FILE *file);
+TF *armazena(TF *fila, char *str);
 
 #endif
