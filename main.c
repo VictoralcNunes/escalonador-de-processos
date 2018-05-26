@@ -6,13 +6,13 @@ int main(){
 	TF *fila = cria_fila();
 	char str[10]; // Variavel para armazenar o nome do arquivo a ser usado
 
-	printf("File name: ");
+	printf("Digite o nome do arquivo: ");
 	scanf("%s", str);
 	fila = armazena(fila, "text.txt");
-
+	
 	int in = 1;
 	while(in){
-		
+
 
 
 		imprime_fila(fila);
