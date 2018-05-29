@@ -47,5 +47,5 @@ void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc);
 Processo* entrada(TF* te);
 Processo* copia_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
-
+int checa_entrada(TF* fila, int tempo);
 #endif
