@@ -18,6 +18,7 @@ typedef struct Processo{
 
 typedef struct Recursos{
     int momento;
+    int memoria;
     int cpu1;
     int cpu2;
     int cpu3;
@@ -54,7 +55,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF **fila);
 void libera_fila(TF *fila);
 
-void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc);
+void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, Recursos* rec, Processo* proc);
 Processo* entrada(TF* te, int tempo);
 Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);

@@ -108,17 +108,6 @@ void libera_fila(TF *fila){
         free(fila);
         libera_fila(fila->prox);
     }
-    
-    // if (!fila){
-    //     TF *proxNo, *atual;
-    //     atual = fila->prox;
-
-    //     while (!atual){
-    //         proxNo = atual->prox;
-    //         free(atual);
-    //         atual = proxNo;
-    //     }
-    // }
 }
 
 TF *armazena(TF *fila, char *str){
@@ -147,16 +136,23 @@ TF *armazena(TF *fila, char *str){
     return(fila);
 }
 
-void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
+void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, Recursos* rec, Processo* proc){
     //escalona os processos que chegam para as filas de prontos
-    if(!proc->prioridade){
-        tfr = ins_proc_ord(tfr, proc);
-        printf("Processo %d na fila de processos tempo real", proc->nome);
+    if(rec->memoria >= proc->memoria){
+        if(!proc->prioridade){
+            tfr = ins_proc_ord(tfr, proc);
+            printf("Processo %d na fila de processos prontos tempo real", proc->nome);
+        }
+        else{
+            tu = ins_proc_ord(tu, proc);
+            printf("Processo %d na fila de processos prontos de usuário", proc->nome);
+        }    
     }
     else{
-        tu = ins_proc_ord(tu, proc);
-        printf("Processo %d na fila de processos de usuário", proc->nome);
+        susp = ins_proc_ord(susp, proc);
+        printf("Processo %d na fila de processos prontos suspensos", proc->nome);
     }
+    
     return;
 }
 
