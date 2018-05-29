@@ -12,7 +12,6 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->scanners = sc;
     processo->modens = mod;
     processo->cds = cds;
-    processo->nomeEst = 0;
     processo->tempo_restante = 0;
     return processo;
 }
@@ -30,7 +29,6 @@ Processo* pop_processo(TF* fila){
                                     proc->modens,
                                     proc->cds);
     copia->numero = proc->numero;
-    copia->nomeEst = proc->nomeEst;
     copia->tempo_restante = proc->tempo_restante;
     fila = aux2;
     free(aux);
@@ -140,6 +138,7 @@ TF *armazena(TF *fila, char *str){
             &processo->scanners,
             &processo->modens,
             &processo->cds);
+        processo->tempo_restante = processo->tempo_de_processador;
         fila = ins_proc_ord(fila, processo);
         numproc++;
     }

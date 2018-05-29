@@ -13,7 +13,6 @@ typedef struct Processo{
     int scanners;
     int modens;
     int cds;
-    int nomeEst;
     int tempo_restante;
 }Processo;
 
