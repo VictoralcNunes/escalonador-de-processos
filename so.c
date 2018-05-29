@@ -150,6 +150,18 @@ void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
     }
 }
 
+
+int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram no tempo indicado
+    if(!fila){
+        return 0;
+    }
+    int qtd = 0;
+    if(fila->processo->tempo_de_chegada == tempo){
+        qtd++;
+        return qtd += na_entrada(fila->prox, tempo);
+    }
+    else return 0;
+}
 // Processo* entrada(TF* te){
 //     if(!te) return NULL;
 
