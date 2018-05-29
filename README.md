@@ -1,7 +1,9 @@
 # Escalonador de Processos
-Universidade Federal Fluminense
-Sistemas Operacioanis 2018.1
 
+Universidade Federal Fluminense
+
+Sistemas Operacioanis 2018.1
+___
 
 ## Comandos para compilar o código via linha de comandos
 

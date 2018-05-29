@@ -63,12 +63,22 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
     }
 }
 
-void imprime_fila(TF* fila){
-    if(!fila){
-        printf("fim\n");
+void imprime_fila(TF **fila){
+    if((*fila) == NULL){
+        printf("Fim\n");
     }else{
-        printf("Processo %d -> ", fila->processo->numero);
-        imprime_fila(fila->prox);
+        printf("Processo %d \n", (*fila)->processo->numero);
+        printf("Tempo de Chegada: %d \n", (*fila)->processo->tempo_de_chegada);
+        printf("Prioridade: %d \n", (*fila)->processo->prioridade);
+        printf("Tempo de Processador: %d \n", (*fila)->processo->tempo_de_processador);
+        printf("Memória: %d \n", (*fila)->processo->memoria);
+        printf("Impressoras: %d \n", (*fila)->processo->impressoras);
+        printf("Scanners: %d \n", (*fila)->processo->scanners);
+        printf("Modens: %d \n", (*fila)->processo->modens);
+        printf("CD's: %d \n", (*fila)->processo->cds);
+        printf("------------------------------------------------\n");
+        (*fila) = (*fila)->prox;
+        imprime_fila(&(*fila));
     }
 }
 void libera_fila(TF *fila){
