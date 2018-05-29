@@ -22,7 +22,7 @@ Processo* pop_processo(TF* fila){
     aux2 = fila->prox;
     Processo* proc = fila->processo;
     Processo* copia = cria_processo(proc->tempo_de_chegada,
-                                    proc->prioridade,
+                                    proc->prioridade, 
                                     proc->tempo_de_processador,
                                     proc->memoria,
                                     proc->impressoras,
