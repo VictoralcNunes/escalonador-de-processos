@@ -150,6 +150,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, Recursos* rec, Processo* pr
             tu = ins_proc_ord(tu, proc);
             printf("Processo %d na fila de processos prontos de usuário", proc->nome);
         }    
+        rec->memoria -= proc->memoria;
     }
     else{
         susp = ins_proc_ord(susp, proc);
