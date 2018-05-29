@@ -15,6 +15,7 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->tempo_restante = 0;
     return processo;
 }
+
 Processo* pop_processo(TF* fila){
     if(!fila) return NULL;
     TF* aux = fila, *aux2;
@@ -83,36 +84,50 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
     }
 }
 
-void imprime_fila(TF **fila){
-    if((*fila) == NULL){
+void imprime_fila(TF *fila){
+    if((fila) == NULL){
         printf("Fim\n");
     }else{
-        printf("Processo %d \n", (*fila)->processo->numero);
-        printf("Tempo de Chegada: %d \n", (*fila)->processo->tempo_de_chegada);
-        printf("Prioridade: %d \n", (*fila)->processo->prioridade);
-        printf("Tempo de Processador: %d \n", (*fila)->processo->tempo_de_processador);
-        printf("Memória: %d \n", (*fila)->processo->memoria);
-        printf("Impressoras: %d \n", (*fila)->processo->impressoras);
-        printf("Scanners: %d \n", (*fila)->processo->scanners);
-        printf("Modens: %d \n", (*fila)->processo->modens);
-        printf("CD's: %d \n", (*fila)->processo->cds);
+        TF* p = fila;
+        printf("Processo %d \n", p->processo->numero);
+        printf("Tempo de Chegada: %d \n", p->processo->tempo_de_chegada);
+        printf("Prioridade: %d \n", p->processo->prioridade);
+        printf("Tempo de Processador: %d \n", p->processo->tempo_de_processador);
+        printf("Memória: %d \n", p->processo->memoria);
+        printf("Impressoras: %d \n", p->processo->impressoras);
+        printf("Scanners: %d \n", p->processo->scanners);
+        printf("Modens: %d \n", p->processo->modens);
+        printf("CD's: %d \n", p->processo->cds);
+
         printf("------------------------------------------------\n");
+<<<<<<< HEAD
         if((*fila)->prox != NULL){
           imprime_fila(&((*fila)->prox));
         }
+=======
+        p = p->prox;
+        imprime_fila(p);
+>>>>>>> be56ea468066e36180d81cfa16826ef8d408aa6a
     }
 }
-void libera_fila(TF *fila){
-    if (!fila){
-        TF *proxNo, *atual;
-        atual = fila->prox;
 
-        while (!atual){
-            proxNo = atual->prox;
-            free(atual);
-            atual = proxNo;
-        }
+void libera_fila(TF *fila){
+    if(!fila) return;
+    else{
+        free(fila);
+        libera_fila(fila->prox);
     }
+    
+    // if (!fila){
+    //     TF *proxNo, *atual;
+    //     atual = fila->prox;
+
+    //     while (!atual){
+    //         proxNo = atual->prox;
+    //         free(atual);
+    //         atual = proxNo;
+    //     }
+    // }
 }
 
 TF *armazena(TF *fila, char *str){
@@ -142,16 +157,21 @@ TF *armazena(TF *fila, char *str){
 }
 
 void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
+    //escalona os processos que chegam para as filas de prontos
     if(!proc->prioridade){
         tfr = ins_proc_ord(tfr, proc);
+        printf("Processo %d na fila de processos tempo real", proc->nome);
     }
     else{
         tu = ins_proc_ord(tu, proc);
+        printf("Processo %d na fila de processos de usuário", proc->nome);
     }
+    return;
 }
 
 
-int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram no tempo indicado
+int na_entrada(TF* fila, int tempo){
+    //retorna a quantidade de jobs que entraram no tempo indicado
     if(!fila){
         return 0;
     }
@@ -162,9 +182,36 @@ int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram 
     }
     else return 0;
 }
-// Processo* entrada(TF* te){
-//     if(!te) return NULL;
+Processo* entrada(TF* te, int tempo){
+    if(!te) return NULL;
+    Processo *entra = pop_processo(te);
+    return entra;
+}
 
+
+<<<<<<< HEAD
 //     Processo *entra = copia_processo(te->processo);
 //     //colocar pop em te
 // }
+=======
+// AMANCO
+
+Recursos* cria_recursos(){
+    Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
+    novo->momento = 0;
+    novo->memoria = 8192;
+    novo->cpu1 = 1;
+    novo->cpu2 = 1;
+    novo->cpu3 = 1;
+    novo->cpu4 = 1;
+    novo->impressoras = 2;
+    novo->scanners = 1;
+    novo->modens = 1;
+    novo->cds = 2;
+    return novo;
+}
+
+void checa_maquina(Recursos* recursos, Processo* p){
+    
+}
+>>>>>>> be56ea468066e36180d81cfa16826ef8d408aa6a

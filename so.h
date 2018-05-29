@@ -16,6 +16,19 @@ typedef struct Processo{
     int tempo_restante;
 }Processo;
 
+typedef struct Recursos{
+    int momento;
+    int memoria;
+    int cpu1;
+    int cpu2;
+    int cpu3;
+    int cpu4;
+    int impressoras;
+    int scanners;
+    int modens;
+    int cds;
+}Recursos;
+
 typedef struct TipoFila{
     Processo *processo;
     struct TipoFila *prox;
@@ -39,12 +52,15 @@ void mata_processo(Processo *processo);
 TF* cria_fila();
 TF* cria_elemento(Processo *processo);
 TF* ins_proc_ord(TF *fila, Processo *processo);
-void imprime_fila(TF **fila);
+void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
+Recursos* cria_recursos();
+
 void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc);
-Processo* entrada(TF* te);
-Processo* copia_processo(Processo* proc);
+Processo* entrada(TF* te, int tempo);
+Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
-int checa_entrada(TF* fila, int tempo);
+int na_entrada(TF* fila, int tempo);
+
 #endif
