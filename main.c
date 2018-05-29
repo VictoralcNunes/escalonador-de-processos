@@ -10,9 +10,8 @@ int main(){
 	
 	int in = 1;
 	while(in){
+		//completar iteração
 		
-		
-
 		imprime_fila(fila);
 		printf("Qualquer parada para pular, exceto 0.");
 		scanf("%d", &in);

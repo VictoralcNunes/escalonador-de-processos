@@ -44,5 +44,8 @@ void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
 TF *armazena(TF *fila, FILE *file);
+void escalonadordeentrada(TF* tfr, TF* tu);
+Processo* entrada(TF* te);
+Processo* copia_processo(Processo* proc);
 
 #endif
