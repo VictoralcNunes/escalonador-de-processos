@@ -15,6 +15,7 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->tempo_restante = 0;
     return processo;
 }
+
 Processo* pop_processo(TF* fila){
     if(!fila) return NULL;
     TF* aux = fila, *aux2;
@@ -83,24 +84,26 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
     }
 }
 
-void imprime_fila(TF **fila){
-    if((*fila) == NULL){
+void imprime_fila(TF *fila){
+    if((fila) == NULL){
         printf("Fim\n");
     }else{
-        printf("Processo %d \n", (*fila)->processo->numero);
-        printf("Tempo de Chegada: %d \n", (*fila)->processo->tempo_de_chegada);
-        printf("Prioridade: %d \n", (*fila)->processo->prioridade);
-        printf("Tempo de Processador: %d \n", (*fila)->processo->tempo_de_processador);
-        printf("Memória: %d \n", (*fila)->processo->memoria);
-        printf("Impressoras: %d \n", (*fila)->processo->impressoras);
-        printf("Scanners: %d \n", (*fila)->processo->scanners);
-        printf("Modens: %d \n", (*fila)->processo->modens);
-        printf("CD's: %d \n", (*fila)->processo->cds);
+        TF* p = fila;
+        printf("Processo %d \n", p->processo->numero);
+        printf("Tempo de Chegada: %d \n", p->processo->tempo_de_chegada);
+        printf("Prioridade: %d \n", p->processo->prioridade);
+        printf("Tempo de Processador: %d \n", p->processo->tempo_de_processador);
+        printf("Memória: %d \n", p->processo->memoria);
+        printf("Impressoras: %d \n", p->processo->impressoras);
+        printf("Scanners: %d \n", p->processo->scanners);
+        printf("Modens: %d \n", p->processo->modens);
+        printf("CD's: %d \n", p->processo->cds);
         printf("------------------------------------------------\n");
-        (*fila) = (*fila)->prox;
-        imprime_fila(&(*fila));
+        p = p->prox;
+        imprime_fila(p);
     }
 }
+
 void libera_fila(TF *fila){
     if(!fila) return;
     else{
@@ -155,7 +158,6 @@ void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
     }
 }
 
-
 int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram no tempo indicado
     if(!fila){
         return 0;
@@ -174,6 +176,24 @@ int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram 
 //     //colocar pop em te
 // }
 
-void checa_maquina(NoTempo* recursos, Processo* p){
+
+// AMANCO
+
+Recursos* cria_recursos(){
+    Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
+    novo->momento = 0;
+    novo->memoria = 8192;
+    novo->cpu1 = 1;
+    novo->cpu2 = 1;
+    novo->cpu3 = 1;
+    novo->cpu4 = 1;
+    novo->impressoras = 2;
+    novo->scanners = 1;
+    novo->modens = 1;
+    novo->cds = 2;
+    return novo;
+}
+
+void checa_maquina(Recursos* recursos, Processo* p){
     
 }
