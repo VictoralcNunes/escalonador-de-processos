@@ -21,7 +21,7 @@ int main(){
 	int in = 1;
 	do{
 		imprime_fila(&fila_entrada);
-		printf("\n Press Enter to continue or 0 to quit. ");printf("\n");
+		printf("\n Press Enter to continue or 0 to quit. \n");
 		scanf("%d", &in);
 	}while(in == 1);
 
