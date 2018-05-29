@@ -55,9 +55,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
-Recursos* cria_recursos();
-
-void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc);
+void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
 Processo* entrada(TF* te, int tempo);
 Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
