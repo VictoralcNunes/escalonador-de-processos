@@ -4,21 +4,24 @@
 
 int main(){
 	TF *fila = cria_fila();
-	FILE *file;
-	file = fopen("text.txt","r");
-	fila = armazena(fila, file);
-	
+
+	char str[10]; // Variavel para armazenar o nome do arquivo a ser usado
+	printf("Digite o nome do arquivo: ");printf("\n");
+	scanf("%s", str);
+	fila = armazena(fila, str);
+
+	int timer = 0;
+
 	int in = 1;
-	while(in){
-		//completar iteração
-		
-		imprime_fila(fila);
-		printf("Qualquer parada para pular, exceto 0.");
+	do{
+
+
+
+		imprime_fila(&fila);
+		printf("\n Press Enter to continue or 0 to quit. ");printf("\n");
 		scanf("%d", &in);
-	}
-	
+	}while(in == 1);
 
 	libera_fila(fila);
-	system("pause");
 	return(0);
 }

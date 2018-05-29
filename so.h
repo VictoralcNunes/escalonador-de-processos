@@ -40,12 +40,12 @@ void mata_processo(Processo *processo);
 TF* cria_fila();
 TF* cria_elemento(Processo *processo);
 TF* ins_proc_ord(TF *fila, Processo *processo);
-void imprime_fila(TF *fila);
+void imprime_fila(TF **fila);
 void libera_fila(TF *fila);
 
-TF *armazena(TF *fila, FILE *file);
-void escalonadordeentrada(TF* tfr, TF* tu);
+void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc);
 Processo* entrada(TF* te);
 Processo* copia_processo(Processo* proc);
+TF *armazena(TF *fila, char *str);
 
 #endif
