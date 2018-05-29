@@ -77,8 +77,9 @@ void imprime_fila(TF **fila){
         printf("Modens: %d \n", (*fila)->processo->modens);
         printf("CD's: %d \n", (*fila)->processo->cds);
         printf("------------------------------------------------\n");
-        (*fila) = (*fila)->prox;
-        imprime_fila(&(*fila));
+        if((*fila)->prox != NULL){
+          imprime_fila(&((*fila)->prox));
+        }
     }
 }
 void libera_fila(TF *fila){
