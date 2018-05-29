@@ -104,16 +104,22 @@ void imprime_fila(TF **fila){
     }
 }
 void libera_fila(TF *fila){
-    if (!fila){
-        TF *proxNo, *atual;
-        atual = fila->prox;
-
-        while (!atual){
-            proxNo = atual->prox;
-            free(atual);
-            atual = proxNo;
-        }
+    if(!fila) return;
+    else{
+        free(fila);
+        libera_fila(fila->prox);
     }
+    
+    // if (!fila){
+    //     TF *proxNo, *atual;
+    //     atual = fila->prox;
+
+    //     while (!atual){
+    //         proxNo = atual->prox;
+    //         free(atual);
+    //         atual = proxNo;
+    //     }
+    // }
 }
 
 TF *armazena(TF *fila, char *str){
@@ -169,3 +175,6 @@ int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram 
 //     //colocar pop em te
 // }
 
+void checa_maquina(NoTempo* recursos, Processo* p){
+    
+}
