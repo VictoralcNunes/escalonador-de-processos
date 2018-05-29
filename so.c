@@ -12,7 +12,29 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->scanners = sc;
     processo->modens = mod;
     processo->cds = cds;
+    processo->nomeEst = 0;
+    processo->tempo_restante = 0;
     return processo;
+}
+Processo* pop_processo(TF* fila){
+    if(!fila) return NULL;
+    TF* aux = fila, *aux2;
+    aux2 = fila->prox;
+    Processo* proc = fila->processo;
+    Processo* copia = cria_processo(proc->tempo_de_chegada,
+                                    proc->prioridade, 
+                                    proc->tempo_de_processador,
+                                    proc->memoria,
+                                    proc->impressoras,
+                                    proc->scanners,
+                                    proc->modens,
+                                    proc->cds);
+    copia->numero = proc->numero;
+    copia->nomeEst = proc->nomeEst;
+    copia->tempo_restante = proc->tempo_restante;
+    fila = aux2;
+    free(aux);
+    return copia;
 }
 
 void mata_processo(Processo *processo){
@@ -119,3 +141,20 @@ TF *armazena(TF *fila, char *str){
     fclose(file);
     return(fila);
 }
+
+void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
+    if(!proc->prioridade){
+        tfr = ins_proc_ord(tfr, proc);
+    }
+    else{
+        tu = ins_proc_ord(tu, proc);
+    }
+}
+
+// Processo* entrada(TF* te){
+//     if(!te) return NULL;
+
+//     Processo *entra = copia_processo(te->processo);
+//     //colocar pop em te
+// }
+
