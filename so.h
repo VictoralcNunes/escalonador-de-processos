@@ -16,6 +16,18 @@ typedef struct Processo{
     int tempo_restante;
 }Processo;
 
+typedef struct Recursos{
+    int momento;
+    int cpu1;
+    int cpu2;
+    int cpu3;
+    int cpu4;
+    int impressoras;
+    int scanners;
+    int modens;
+    int cds;
+}Recursos;
+
 typedef struct TipoFila{
     Processo *processo;
     struct TipoFila *prox;
