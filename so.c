@@ -100,14 +100,9 @@ void imprime_fila(TF *fila){
         printf("CD's: %d \n", p->processo->cds);
 
         printf("------------------------------------------------\n");
-<<<<<<< HEAD
         if((*fila)->prox != NULL){
           imprime_fila(&((*fila)->prox));
         }
-=======
-        p = p->prox;
-        imprime_fila(p);
->>>>>>> be56ea468066e36180d81cfa16826ef8d408aa6a
     }
 }
 
@@ -189,29 +184,6 @@ Processo* entrada(TF* te, int tempo){
 }
 
 
-<<<<<<< HEAD
 //     Processo *entra = copia_processo(te->processo);
 //     //colocar pop em te
 // }
-=======
-// AMANCO
-
-Recursos* cria_recursos(){
-    Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
-    novo->momento = 0;
-    novo->memoria = 8192;
-    novo->cpu1 = 1;
-    novo->cpu2 = 1;
-    novo->cpu3 = 1;
-    novo->cpu4 = 1;
-    novo->impressoras = 2;
-    novo->scanners = 1;
-    novo->modens = 1;
-    novo->cds = 2;
-    return novo;
-}
-
-void checa_maquina(Recursos* recursos, Processo* p){
-    
-}
->>>>>>> be56ea468066e36180d81cfa16826ef8d408aa6a
