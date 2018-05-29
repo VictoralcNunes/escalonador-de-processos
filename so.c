@@ -96,6 +96,7 @@ void imprime_fila(TF **fila){
         printf("Scanners: %d \n", (*fila)->processo->scanners);
         printf("Modens: %d \n", (*fila)->processo->modens);
         printf("CD's: %d \n", (*fila)->processo->cds);
+        printf("Tempo restante: %d \n", (*fila)->processo->tempo_restante);
         printf("------------------------------------------------\n");
         (*fila) = (*fila)->prox;
         imprime_fila(&(*fila));
@@ -141,16 +142,21 @@ TF *armazena(TF *fila, char *str){
 }
 
 void escalonadordeentrada(TF* tfr, TF* tu, Processo* proc){
+    //escalona os processos que chegam para as filas de prontos
     if(!proc->prioridade){
         tfr = ins_proc_ord(tfr, proc);
+        printf("Processo %d na fila de processos tempo real", proc->nome);
     }
     else{
         tu = ins_proc_ord(tu, proc);
+        printf("Processo %d na fila de processos de usuário", proc->nome);
     }
+    return;
 }
 
 
-int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram no tempo indicado
+int na_entrada(TF* fila, int tempo){
+    //retorna a quantidade de jobs que entraram no tempo indicado
     if(!fila){
         return 0;
     }
@@ -161,10 +167,9 @@ int na_entrada(TF* fila, int tempo){//retorna a quantidade de jobs que entraram 
     }
     else return 0;
 }
-// Processo* entrada(TF* te){
-//     if(!te) return NULL;
-
-//     Processo *entra = copia_processo(te->processo);
-//     //colocar pop em te
-// }
+Processo* entrada(TF* te, int tempo){
+    if(!te) return NULL;
+    Processo *entra = pop_processo(te);
+    return entra;
+}
 
