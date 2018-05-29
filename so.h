@@ -52,7 +52,7 @@ void mata_processo(Processo *processo);
 TF* cria_fila();
 TF* cria_elemento(Processo *processo);
 TF* ins_proc_ord(TF *fila, Processo *processo);
-void imprime_fila(TF **fila);
+void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, Recursos* rec, Processo* proc);
