@@ -2,7 +2,7 @@
 
 Universidade Federal Fluminense
 
-Sistemas Operacioanis 2018.1
+Sistemas Operacionais 2018.1
 ___
 
 ## Comandos para compilar o código via linha de comandos
