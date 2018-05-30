@@ -57,10 +57,12 @@ void libera_fila(TF *fila);
 
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
 Processo* entrada(TF* fe, int tempo);
-Processo* pop_processo(TF* fila);
+Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
 int na_entrada(TF* fila, int tempo);
 void escalonadorCurtoReal(TF *pronto, Recursos *pc);
+void escalonadorCurtoFeedback(TF *pronto,Recursos *pc);
+int alocarProc(Processo *proc,Recursos *pc);
 Recursos* cria_recursos();
 int checa_disponibilidade(Recursos* recursos, Processo* p);
 

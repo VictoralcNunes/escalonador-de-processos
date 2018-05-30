@@ -144,19 +144,19 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
-            printf("Processo %d na fila de processos prontos tempo real", proc->numero);
+            printf("Processo %d na fila de processos prontos tempo real", proc->nome);
         }
         else{
             tu = ins_proc_ord(tu, proc);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
-            printf("Processo %d na fila de processos prontos de usuário", proc->numero);
+            printf("Processo %d na fila de processos prontos de usuário", proc->nome);
         }
         rec->memoria -= proc->memoria;
     }
     else{
         if(!bloq && !tu){
             susp = ins_proc_ord(susp, proc);
-            printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+            printf("Processo %d na fila de processos prontos suspensos", proc->nome);
         }
         else{
             if(!proc->prioridade){
@@ -170,7 +170,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             }
             else{
                 susp = ins_proc_ord(susp, proc);
-                printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+                printf("Processo %d na fila de processos prontos suspensos", proc->nome);
             }
         }
     }
@@ -244,6 +244,112 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     }
 
 }
+
+void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
+    int menorPrioridade = pronto->processo->prioridade;
+    TF *aux= pronto;
+    while (aux!=NULL){
+        if(aux->processo->prioridade<menorPrioridade){
+            menorPrioridade = aux->processo->prioridade;
+        }
+        aux = aux->proximo;
+    }
+    TF *prioritarios = cria_fila();
+    aux = pronto;
+    while(aux!=NULL){
+        if(aux->processo->prioridade==menorPrioridade){
+            prioritarios = ins_proc_ord(prioritarios,aux->processo);
+        }
+        aux = aux->prox;
+    }
+    if(prioritarios->prox==NULL){
+        //Método para ver se aquele recurso está sendo usado
+        if(alocarProc(prioritarios->processo,pc)){
+            printf("O processo %d está sendo executado\n", prioritarios->processo->numero);
+            prioritarios->processo->tempo_restante--;
+                if(prioritarios->processo->tempo_restante==0){
+                    printf("Processo %d terminado\n", prioritarios->processo->numero);
+                    pop_processo(prioritarios);
+                }
+        }
+    return;
+    }
+
+    int menorTempo = prioritarios->processo->tempo_restante;
+    aux = prioritarios;
+    while(aux!=NULL){
+        if(aux->processo->tempo_restante<menorTempo){
+            menorTempo = aux->processo->tempo_restante;
+        }
+        aux = aux->prox;
+    }
+    aux = prioritarios;
+    while(aux->processo->tempo_restante!=menorTempo){
+        aux= aux->prox;
+    }
+    if(alocarProc(aux->processo,pc)){
+            printf("O processo %d está sendo executado\n", aux->processo->numero);
+            aux->processo->tempo_restante--;
+                if(aux->processo->tempo_restante==0){
+                    printf("Processo %d terminado\n", aux->processo->numero);
+                    //pop_processo(prioritarios);
+                }
+        }
+
+return ;
+}
+int alocarProc(Processo *proc,Recursos *pc){
+    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+        printf("Não tem CPU disponível\n");
+        return NULL;
+    }
+    if(pc->cpu1==1)pc->cpu1--;
+    if(pc->cpu2==1)pc->cpu2--;
+    if(pc->cpu3==1)pc->cpu3--;
+    if(pc->cpu4==1)pc->cpu4--;
+    if(proc->impressoras==1){
+        if(pc->impressoras==0){
+        //processo sem recurso disponivel
+            printf("Recurso Indisponível\n");
+            return NULL;
+        }
+        //processo tinha recurso disponivel
+        pc->impressoras--;
+        return 1;
+    }
+    if(proc->scanners==1){
+        if(pc->scanners==0){
+        //processo sem recurso disponivel
+            printf("Recurso Indisponível\n");
+            return NULL;
+        }
+        //processo tinha recurso disponivel
+        pc->scanners--;
+        return 1;
+    }
+    if(proc->modens==1){
+        if(pc->modens==0){
+        //processo sem recurso disponivel
+            printf("Recurso Indisponível\n");
+            return NULL;
+        }
+        //processo tinha recurso disponivel
+        pc->modens--;
+        return 1;
+    }
+    if(proc->cds==1){
+        if(pc->cds==0){
+        //processo sem recurso disponivel
+            printf("Recurso Indisponível\n");
+            return NULL;
+        }
+        //processo tinha recurso disponivel
+        pc->cds--;
+        return 1;
+    }
+}
+
+
 
 
 // AMANCO

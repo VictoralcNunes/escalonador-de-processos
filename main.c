@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "so.h"
+#include "so.c"
 
 int main(){
-
+	
 	TF *fila_entrada = cria_fila();
 	TF *fila_pronto_real = cria_fila();
 	TF *fila_pronto_usuario = cria_fila();
@@ -16,16 +16,14 @@ int main(){
 	char str[10]; // Variavel para armazenar o nome do arquivo a ser usado
 	printf("Digite o nome do arquivo: ");printf("\n");
 	scanf("%s", str);
-
+	
 	fila_entrada = armazena(fila_entrada, str);
-	char c;
-	int timer = 0;
-	while((c = getchar()) != '0'){
-		printf("Tempo: %d\n", timer);
-		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada
+	
+	while(fila-entrada){
+		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada 
 		//com a função na_entrada
 
-		//	chamar escalonador de entrada dentro de um while que decrementa uma variável
+		//	chamar escalonador de entrada dentro de um while que decrementa uma variável 
 		//que guardou a  o valor de na_entrada, fazendo um pop da entrada
 
 		//	chamar o escalonador de curto prazo. Ele faz a decisão de qual politica vai usar
@@ -39,19 +37,18 @@ int main(){
 		//	a cada troca de estado, printar a mudança
 
 		//	a cada momento, printar o estado dos recursos
-		printf("\nTecle enter para continuar ou 0 para sair.\n");
-		recursos->momento++;
-		timer++;
+		
+		recursos->momento++;	
 	}
-
-
-
+	
+	
+	
 	imprime_fila(fila_entrada);
-
-
-
+	
+	
+	
 
 	libera_fila(fila_entrada);
 	return(0);
-
+	
 }
