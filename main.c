@@ -19,7 +19,9 @@ int main(){
 
 	fila_entrada = armazena(fila_entrada, str);
 	char c;
+	int timer = 0;
 	while((c = getchar()) != '0'){
+		printf("Tempo: %d\n", timer);
 		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada
 		//com a função na_entrada
 
@@ -39,6 +41,7 @@ int main(){
 		//	a cada momento, printar o estado dos recursos
 		printf("\nTecle enter para continuar ou 0 para sair.\n");
 		recursos->momento++;
+		timer++;
 	}
 
 
