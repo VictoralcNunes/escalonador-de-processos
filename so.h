@@ -15,7 +15,6 @@ typedef struct Processo{
     int cds;
     int tempo_restante;
 }Processo;
-
 typedef struct Recursos{
     int momento;
     int memoria;
@@ -28,12 +27,10 @@ typedef struct Recursos{
     int modens;
     int cds;
 }Recursos;
-
 typedef struct TipoFila{
     Processo *processo;
     struct TipoFila *prox;
 }TF;
-
 typedef struct NoTempo{
     int index;
     Processo *processo;
@@ -70,4 +67,5 @@ int checa_disponibilidade(Recursos* recursos, Processo* p);
 void print_processo(Processo *);
 void print_recursos(Recursos **);
 void print_estado(TF*, TF*, TF*, TF*, TF*, TF*);
+
 #endif

@@ -15,7 +15,6 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->tempo_restante = 0;
     return processo;
 }
-
 Processo* pop_processo(TF* fila){
     if(!fila) return NULL;
     TF* aux = fila, *aux2;
@@ -35,23 +34,19 @@ Processo* pop_processo(TF* fila){
     free(aux);
     return copia;
 }
-
 void mata_processo(Processo *processo){
     free(processo);
     return;
 }
-
 TF* cria_fila(){
     return NULL;
 }
-
 TF* cria_elemento(Processo* processo){
     TF* novo = (TF*)malloc(sizeof(TF));
     novo->prox = NULL;
     novo->processo = processo;
     return novo;
 }
-
 TF* ins_proc_ord(TF* fila, Processo* processo){
     if(!fila){ //se a fila está vazia
         return cria_elemento(processo);
@@ -83,7 +78,6 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
         }
     }
 }
-
 void imprime_fila(TF *fila){
     if((fila) == NULL){
         printf("Fim\n");
@@ -103,7 +97,6 @@ void imprime_fila(TF *fila){
         imprime_fila(p);
     }
 }
-
 void libera_fila(TF *fila){
     if(!fila) return;
     else{
@@ -111,7 +104,6 @@ void libera_fila(TF *fila){
         libera_fila(fila->prox);
     }
 }
-
 TF *armazena(TF *fila, char *str){
     int numproc = 0;
     Processo *processo = NULL;
@@ -137,7 +129,6 @@ TF *armazena(TF *fila, char *str){
     fclose(file);
     return(fila);
 }
-
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc){
     //escalona os processos que chegam para as filas de prontos
     if(checa_disponibilidade(rec, proc)){
@@ -176,8 +167,6 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
 
     return;
 }
-
-
 int na_entrada(TF* fila, int tempo){
     //retorna a quantidade de jobs que entraram no tempo indicado
     if(!fila){
@@ -208,20 +197,15 @@ void escalonadorMedio(TF *origem, TF *fim){
     while(aux->processo->prioridade!=maiorPrioridade){
             aux = aux->prox;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    TF *transferidor = pop_processo(aux);
-    fim = ins_proc_ord(transferidor->processo);
-=======
-    fim = ins_proc_ord(fim,pop_processo(aux));
->>>>>>> eba3df33fcf7f97e1817c235f6679d7ba12e8180
-=======
-    // TF *transferidor = pop_processo(aux);
-    fim = ins_proc_ord(fim,pop_processo(aux));
-    //fim = ins_proc_ord(fim,transferidor->processo);
->>>>>>> 7422f2174d359ae8d379154ba121629150f679a8
-}
+  //  TF *transferidor = pop_processo(aux);
+  //  fim = ins_proc_ord(transferidor->processo);
 
+  // fim = ins_proc_ord(fim,pop_processo(aux));
+
+    // TF *transferidor = pop_processo(aux);
+  //  fim = ins_proc_ord(fim,pop_processo(aux));
+    //fim = ins_proc_ord(fim,transferidor->processo);
+}
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     if(!pronto){
         //checando para ver se tem algo errado
@@ -269,7 +253,6 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     }
 
 }
-
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     int menorPrioridade = pronto->processo->prioridade;
     TF *aux= pronto;
@@ -374,11 +357,7 @@ int alocarProc(Processo *proc,Recursos *pc){
     }
 }
 
-
-
-
 // AMANCO
-
 Recursos* cria_recursos(){
     Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
     novo->momento = 0;
@@ -393,7 +372,6 @@ Recursos* cria_recursos(){
     novo->cds = 2;
     return(novo);
 }
-
 int checa_disponibilidade(Recursos* recursos, Processo* p){
     if(recursos->memoria >= p->memoria &&
         recursos->impressoras >= p->impressoras &&
@@ -404,7 +382,6 @@ int checa_disponibilidade(Recursos* recursos, Processo* p){
     }
     return(0);
 }
-
 
 // PEDRO
 void print_processo(Processo *processo){
@@ -426,8 +403,8 @@ void print_processo(Processo *processo){
 }
 void print_recursos(Recursos **recurso){
   printf("\n");
-  printf("|---- RECURSOS ---|\n");
-  printf("| Memória: %d     |\n", (*recurso)->memoria);
+  printf("|--- RECURSOS ---|\n");
+  printf("| Memória: %d  |\n", (*recurso)->memoria);
   printf("| CPU1: %d        |\n", (*recurso)->cpu1);
   printf("| CPU2: %d        |\n", (*recurso)->cpu2);
   printf("| CPU3: %d        |\n", (*recurso)->cpu3);
@@ -436,9 +413,8 @@ void print_recursos(Recursos **recurso){
   printf("| Scanners: %d    |\n", (*recurso)->scanners);
   printf("| Modens: %d      |\n", (*recurso)->modens);
   printf("| CD's: %d        |\n", (*recurso)->cds);
-  printf("|-----------------|\n");
+  printf("|----------------|\n");
 }
-
 void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
   if(!fe){
     printf("Fila de Entrada: ");
