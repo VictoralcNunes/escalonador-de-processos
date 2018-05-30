@@ -198,7 +198,7 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
         printf("Fila vazia.\n Checar inconsistencia\n");
         return;
     }
-    int menor = pronto->processo->tempo_de_chegada;
+    /*int menor = pronto->processo->tempo_de_chegada;
     TF *aux1 = pronto;
     // procurando o menor tempo de chegada
     while (aux1){
@@ -217,9 +217,15 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
         printf("Deu erro\n");
         return;
     }
-    printf("Executa processo %d\n", aux2->processo->numero);
+    */
+
+    printf("Executa processo %d\n", pronto->processo->numero);
     pc->cpu1--;
-    pc->memoria= pc->memoria - aux2->processo->memoria;
+    pc->memoria= (pc->memoria) - (pronto->processo->memoria);
+    pronto->processo->tempo_restante--;
+    if((pronto->processo->tempo_restante)==0){
+        pop_processo(pronto->processo);
+    }
 
 }
 
