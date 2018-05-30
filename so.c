@@ -100,8 +100,8 @@ void imprime_fila(TF *fila){
         printf("CD's: %d \n", p->processo->cds);
 
         printf("------------------------------------------------\n");
-        if((*fila)->prox != NULL){
-          imprime_fila(&((*fila)->prox));
+        if(p->prox != NULL){
+          imprime_fila(p->prox);
         }
     }
 }
