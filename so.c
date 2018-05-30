@@ -203,6 +203,24 @@ void escalonadorMedio(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
+void escalonadorMedioVolta(TF *origem, TF *fim){
+    int menorPrioridade = origem->processo->prioridade;
+    TF* aux;
+    aux = origem;
+    while (aux){
+        if(aux->processo->prioridade<maiorPrioridade) menorPrioridade = aux->processo->prioridade;
+        aux = aux->prox;
+    }
+    aux = origem;
+    while(aux->processo->prioridade!=maiorPrioridade){
+            aux = aux->prox;
+    }
+    fim = ins_proc_ord(fim,pop_processo(aux));
+    //ins_proc_ord(fim,pop_processo(aux));
+    // TF *transferidor = pop_processo(aux);
+
+    //fim = ins_proc_ord(fim,transferidor->processo);
+}
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     if(!pronto){
         //checando para ver se tem algo errado
