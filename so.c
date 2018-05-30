@@ -98,7 +98,6 @@ void imprime_fila(TF *fila){
         printf("Scanners: %d \n", p->processo->scanners);
         printf("Modens: %d \n", p->processo->modens);
         printf("CD's: %d \n", p->processo->cds);
-
         printf("------------------------------------------------\n");
         p = p->prox;
         imprime_fila(p);
@@ -416,16 +415,18 @@ void print_processo(Processo *processo){
   }
 }
 void print_recursos(Recursos **recurso){
-  printf("\n--- RECURSOS ---\n");
-  printf("Memória: %d\n", (*recurso)->memoria);
-  printf("CPU1: %d\n", (*recurso)->cpu1);
-  printf("CPU2: %d\n", (*recurso)->cpu2);
-  printf("CPU3: %d\n", (*recurso)->cpu3);
-  printf("CPU4: %d\n", (*recurso)->cpu4);
-  printf("Impressoras: %d\n", (*recurso)->impressoras);
-  printf("Scanners: %d\n", (*recurso)->scanners);
-  printf("Modens: %d\n", (*recurso)->modens);
-  printf("CD's: %d\n", (*recurso)->cds);
+  printf("\n");
+  printf("|---- RECURSOS ---|\n");
+  printf("| Memória: %d     |\n", (*recurso)->memoria);
+  printf("| CPU1: %d        |\n", (*recurso)->cpu1);
+  printf("| CPU2: %d        |\n", (*recurso)->cpu2);
+  printf("| CPU3: %d        |\n", (*recurso)->cpu3);
+  printf("| CPU4: %d        |\n", (*recurso)->cpu4);
+  printf("| Impressoras: %d |\n", (*recurso)->impressoras);
+  printf("| Scanners: %d    |\n", (*recurso)->scanners);
+  printf("| Modens: %d      |\n", (*recurso)->modens);
+  printf("| CD's: %d        |\n", (*recurso)->cds);
+  printf("|-----------------|\n");
 }
 
 void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
