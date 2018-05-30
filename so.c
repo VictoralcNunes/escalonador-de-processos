@@ -250,7 +250,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     TF *aux= pronto;
     while (aux!=NULL){
         if(aux->processo->prioridade<menorPrioridade){
-            menorPrioridade = aux1->processo->prioridade;
+            menorPrioridade = aux->processo->prioridade;
         }
         aux = aux->proximo;
     }
