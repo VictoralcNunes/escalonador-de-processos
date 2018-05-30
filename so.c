@@ -229,7 +229,7 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
     pronto->processo->tempo_restante--;
     if((pronto->processo->tempo_restante)==0){
-        pop_processo(pronto->processo);
+        pop_processo(pronto);
     }
 
 }
