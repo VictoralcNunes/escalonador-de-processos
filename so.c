@@ -296,7 +296,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
                 }
         }
 
-return ;
+    return ;
 }
 int alocarProc(Processo *proc,Recursos *pc){
     if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
@@ -378,4 +378,19 @@ int checa_disponibilidade(Recursos* recursos, Processo* p){
             return(1);
     }
     return(0);
+}
+
+
+// PEDRO
+void print_recursos(Recursos **recurso){
+  printf("\n--- RECURSOS ---\n");
+  printf("Memória: %d\n", (*recurso)->memoria);
+  printf("CPU1: %d\n", (*recurso)->cpu1);
+  printf("CPU2: %d\n", (*recurso)->cpu2);
+  printf("CPU3: %d\n", (*recurso)->cpu3);
+  printf("CP4: %d\n", (*recurso)->cpu4);
+  printf("Impressoras: %d\n", (*recurso)->impressoras);
+  printf("Scanners: %d\n", (*recurso)->scanners);
+  printf("Modens: %d\n", (*recurso)->modens);
+  printf("CD's: %d\n", (*recurso)->cds);
 }

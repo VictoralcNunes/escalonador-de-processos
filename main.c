@@ -14,16 +14,16 @@ int main(){
 	Recursos* recursos = cria_recursos();
 
 	char str[10]; // Variavel para armazenar o nome do arquivo a ser usado
-	printf("Digite o nome do arquivo: ");printf("\n");
+	printf("Digite o nome do arquivo: text.txt");printf("\n");
 	scanf("%s", str);
 
 	fila_entrada = armazena(fila_entrada, str);
-	char c;
+	char c = '1';
 	int timer = 0;
 	while((c = getchar()) != '0'){
+		printf("--- TEMPO: %d ---\n", timer);
 		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada
 		//com a função na_entrada
-
 		//	chamar escalonador de entrada dentro de um while que decrementa uma variável
 		//que guardou a  o valor de na_entrada, fazendo um pop da entrada
 
@@ -38,6 +38,7 @@ int main(){
 		//	a cada troca de estado, printar a mudança
 
 		//	a cada momento, printar o estado dos recursos
+		print_recursos(&recursos);
 		printf("\nTecle Enter para continuar ou 0 para sair.\n");
 		recursos->momento++;
 		timer++;
@@ -45,11 +46,7 @@ int main(){
 
 
 
-	imprime_fila(fila_entrada);
-
-
-
-
+	// imprime_fila(fila_entrada);
 	libera_fila(fila_entrada);
 	return(0);
 
