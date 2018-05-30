@@ -382,6 +382,23 @@ int checa_disponibilidade(Recursos* recursos, Processo* p){
 
 
 // PEDRO
+void print_processo(Processo *processo){
+  if(processo){
+    printf("\n");
+    printf("|-------------------------|\n");
+    printf("| Processo %d              |\n", processo->numero);
+    printf("|-------------------------|\n");
+    printf("| Tempo de Chegada: %d     |\n", processo->tempo_de_chegada);
+    printf("| Prioridade: %d           |\n", processo->prioridade);
+    printf("| Tempo de Processador: %d |\n", processo->tempo_de_processador);
+    printf("| Memória: %d            |\n", processo->memoria);
+    printf("| Impressoras: %d          |\n", processo->impressoras);
+    printf("| Scanners: %d             |\n", processo->scanners);
+    printf("| Modens: %d               |\n", processo->modens);
+    printf("| CD's: %d                 |\n", processo->cds);
+    printf("|-------------------------|\n");
+  }
+}
 void print_recursos(Recursos **recurso){
   printf("\n--- RECURSOS ---\n");
   printf("Memória: %d\n", (*recurso)->memoria);
@@ -405,31 +422,31 @@ void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
   }if(!fpr){
     printf("Fila Pronto Real: ");
     while(fpr != NULL){
-      printf("Processo %d", fpr->processo->numero);
+      printf("Processo %d ", fpr->processo->numero);
       fpr = fpr->prox;
     }
   }if(!fpu){
     printf("Fila Pronto Usuario: ");
     while(fpu != NULL){
-      printf("Processo %d", fpu->processo->numero);
+      printf("Processo %d ", fpu->processo->numero);
       fpu = fpu->prox;
     }
   }if(!fps){
     printf("Fila Pronto Suspensoo: ");
     while(fps != NULL){
-      printf("Processo %d", fps->processo->numero);
+      printf("Processo %d ", fps->processo->numero);
       fps = fps->prox;
     }
   }if(!fb){
     printf("Fila Bloqueado: ");
     while(fb != NULL){
-      printf("Processo %d", fb->processo->numero);
+      printf("Processo %d ", fb->processo->numero);
       fb = fb->prox;
     }
   }if(!fbs){
     printf("Fila Bloqueado Suspenso: ");
     while(fe != NULL){
-      printf("Processo %d", fbs->processo->numero);
+      printf("Processo %d ", fbs->processo->numero);
       fbs = fbs->prox;
     }
   }

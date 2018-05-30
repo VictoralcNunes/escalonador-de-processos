@@ -21,7 +21,10 @@ int main(){
 	int timer = 0;
 	while((str[0] = getchar()) != '0'){
 		printf("--- TEMPO %d ---\n", timer);
-
+		if (fila_auxiliar->processo->tempo_de_chegada == timer) {
+			printf("%d\n", fila_auxiliar->processo->numero);
+			fila_auxiliar = fila_auxiliar->prox;
+		}
 		// Checar recursos->momento == processo->tempo_de_chegada na frente da entrada com a função na_entrada
 
 		//	chamar escalonador de entrada dentro de um while que decrementa uma variável
@@ -36,23 +39,20 @@ int main(){
 		//suspensos
 
 		//	a cada troca de estado, printar a mudança
-		print_estado(fila_entrada,
-								fila_pronto_real,
-								fila_pronto_usuario,
-								fila_pronto_suspenso,
-								fila_bloqueado,
-								fila_bloqueado_suspenso);
+		// print_estado(fila_entrada,
+		// 						fila_pronto_real,
+		// 						fila_pronto_usuario,
+		// 						fila_pronto_suspenso,
+		// 						fila_bloqueado,
+		// 						fila_bloqueado_suspenso);
 		//	a cada momento, printar o estado dos recursos
 		print_recursos(&recursos);
 		printf("\nTecle Enter para continuar ou 0 para sair.\n");
-		fila_auxiliar = fila_entrada;
 		recursos->momento++;
 		timer++;
 	}
-
-
-
-	imprime_fila(fila_entrada);
+	
+	//imprime_fila(fila_entrada);
 	libera_fila(fila_entrada);
 	return(0);
 

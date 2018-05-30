@@ -66,6 +66,7 @@ int alocarProc(Processo *proc,Recursos *pc);
 Recursos* cria_recursos();
 int checa_disponibilidade(Recursos* recursos, Processo* p);
 //PEDRO
+void print_processo(Processo *);
 void print_recursos(Recursos **);
 void print_estado(TF*, TF*, TF*, TF*, TF*, TF*);
 #endif
