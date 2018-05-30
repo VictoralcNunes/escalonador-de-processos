@@ -165,7 +165,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
                 }
                 if(tu){
                     //escalonador medio tu->susp
-                }  
+                }
                 escalonadordeentrada(tfr, tu, susp, bloq, bloqs, rec, proc);
             }
             else{
@@ -203,6 +203,12 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
         printf("Fila vazia.\n Checar inconsistencia\n");
         return;
     }
+    int numCPU;
+    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+        printf("Não existe CPU disponível\n");
+        //caso seja obrigatorio liberar esse espaço de memoria para usar o cpu criaremos um metodo que retorna o CPU liberado
+        return;
+    }
     /*int menor = pronto->processo->tempo_de_chegada;
     TF *aux1 = pronto;
     // procurando o menor tempo de chegada
@@ -225,11 +231,14 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     */
 
     printf("Executa processo %d\n", pronto->processo->numero);
-    pc->cpu1--;
+    if(pc->cpu1==1)pc->cpu1--;
+    if(pc->cpu2==1)pc->cpu2--;
+    if(pc->cpu3==1)pc->cpu3--;
+    if(pc->cpu4==1)pc->cpu4--;
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
     pronto->processo->tempo_restante--;
     if((pronto->processo->tempo_restante)==0){
-        printf("Processo %d terminado. Tempo da maquina: %d", pronto->processo->numero, pc->momento);
+        printf("Processo %d terminou de executar em: %d", pronto->processo->numero, pc->momento);
         pop_processo(pronto);
         
     }
