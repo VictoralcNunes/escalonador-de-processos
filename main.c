@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "so.c"
+#include "so.h"
 
 int main(){
 
