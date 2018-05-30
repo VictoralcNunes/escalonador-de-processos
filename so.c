@@ -208,11 +208,11 @@ void escalonadorMedioVolta(TF *origem, TF *fim){
     TF* aux;
     aux = origem;
     while (aux){
-        if(aux->processo->prioridade<maiorPrioridade) menorPrioridade = aux->processo->prioridade;
+        if(aux->processo->prioridade<menorPrioridade) menorPrioridade = aux->processo->prioridade;
         aux = aux->prox;
     }
     aux = origem;
-    while(aux->processo->prioridade!=maiorPrioridade){
+    while(aux->processo->prioridade!=menorPrioridade){
             aux = aux->prox;
     }
     fim = ins_proc_ord(fim,pop_processo(aux));
