@@ -229,7 +229,9 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
     pronto->processo->tempo_restante--;
     if((pronto->processo->tempo_restante)==0){
+        printf("Processo %d terminado. Tempo da maquina: %d", pronto->processo->numero, pc->momento);
         pop_processo(pronto);
+        
     }
 
 }
