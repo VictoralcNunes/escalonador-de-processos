@@ -61,6 +61,8 @@ Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
 int na_entrada(TF* fila, int tempo);
 void escalonadorCurtoReal(TF *pronto, Recursos *pc);
+void escalonadorCurtoFeedback(TF *pronto,Recursos *pc);
+int alocarProc(Processo *proc,Recursos *pc);
 Recursos* cria_recursos();
 int checa_disponibilidade(Recursos* recursos, Processo* p);
 
