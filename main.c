@@ -18,8 +18,8 @@ int main(){
 	scanf("%s", str);
 
 	fila_entrada = armazena(fila_entrada, str);
-
-	while(fila_entrada){
+	char c;
+	while((c = getchar()) != '0'){
 		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada
 		//com a função na_entrada
 
@@ -37,7 +37,7 @@ int main(){
 		//	a cada troca de estado, printar a mudança
 
 		//	a cada momento, printar o estado dos recursos
-
+		printf("\nTecle enter para continuar ou 0 para sair.\n");
 		recursos->momento++;
 	}
 
