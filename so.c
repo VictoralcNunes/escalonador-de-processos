@@ -210,7 +210,7 @@ void escalonadorMedio(TF *origem, TF *fim){
             aux = aux->prox;
     }
     TF *transferidor = pop_processo(aux);
-    fim = ins_proc_ord(transferidor->processo);
+    fim = ins_proc_ord(fim,transferidor->processo);
 }
 
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
