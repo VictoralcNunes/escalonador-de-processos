@@ -209,11 +209,17 @@ void escalonadorMedio(TF *origem, TF *fim){
             aux = aux->prox;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     TF *transferidor = pop_processo(aux);
     fim = ins_proc_ord(transferidor->processo);
 =======
     fim = ins_proc_ord(fim,pop_processo(aux));
 >>>>>>> eba3df33fcf7f97e1817c235f6679d7ba12e8180
+=======
+    // TF *transferidor = pop_processo(aux);
+    fim = ins_proc_ord(fim,pop_processo(aux));
+    //fim = ins_proc_ord(fim,transferidor->processo);
+>>>>>>> 7422f2174d359ae8d379154ba121629150f679a8
 }
 
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
