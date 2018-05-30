@@ -141,7 +141,7 @@ TF *armazena(TF *fila, char *str){
 
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc){
     //escalona os processos que chegam para as filas de prontos
-    if(rec->memoria >= proc->memoria){
+    if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
             printf("Processo %d na fila de processos prontos tempo real", proc->nome);
@@ -191,9 +191,9 @@ int na_entrada(TF* fila, int tempo){
     }
     else return 0;
 }
-Processo* entrada(TF* te, int tempo){
-    if(!te) return NULL;
-    Processo *entra = pop_processo(te);
+Processo* entrada(TF* fe, int tempo){
+    if(!fe) return NULL;
+    Processo *entra = pop_processo(fe);
     return entra;
 }
 //Gabriel
@@ -246,6 +246,13 @@ Recursos* cria_recursos(){
     return novo;
 }
 
-void checa_maquina(Recursos* recursos, Processo* p){
-
+int checa_disponibilidade(Recursos* recursos, Processo* p){
+    if(recursos->memoria >= p->memoria &&
+        recursos->impressoras >= p->impressoras &&
+        recursos->scanners >= p->scanners &&
+        recursos->cds >= p->cds &&
+        recursos->modens >= p->modens){
+            return 1;
+    }
+    return 0;
 }
