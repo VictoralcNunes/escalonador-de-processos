@@ -209,8 +209,7 @@ void escalonadorMedio(TF *origem, TF *fim){
     while(aux->processo->prioridade!=maiorPrioridade){
             aux = aux->prox;
     }
-    TF *transferidor = pop_processo(aux);
-    fim = ins_proc_ord(fim,transferidor->processo);
+    fim = ins_proc_ord(fim,pop_processo(aux));
 }
 
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
