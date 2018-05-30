@@ -197,6 +197,22 @@ Processo* entrada(TF* fe, int tempo){
     return entra;
 }
 //Gabriel
+void escalonadorMedio(TF *origem, TF *fim){
+    int maiorPrioridade = origem->processo->prioridade;
+    TF* aux;
+    aux = origem;
+    while (aux){
+        if(aux->processo->prioridade>maiorPrioridade) maiorPrioridade = aux->processo->prioridade;
+        aux = aux->prox;
+    }
+    aux = origem;
+    while(aux->processo->prioridade!=maiorPrioridade){
+            aux = aux->prox;
+    }
+    TF *transferidor = pop_processo(aux);
+
+}
+
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     if(!pronto){
         //checando para ver se tem algo errado
