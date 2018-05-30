@@ -60,6 +60,7 @@ Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(TF* fila);
 TF *armazena(TF *fila, char *str);
 int na_entrada(TF* fila, int tempo);
+void escalonadorMedio(TF *origem, TF *fim);
 void escalonadorCurtoReal(TF *pronto, Recursos *pc);
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc);
 int alocarProc(Processo *proc,Recursos *pc);
