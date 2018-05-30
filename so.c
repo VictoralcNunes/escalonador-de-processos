@@ -22,7 +22,7 @@ Processo* pop_processo(TF* fila){
     aux2 = fila->prox;
     Processo* proc = fila->processo;
     Processo* copia = cria_processo(proc->tempo_de_chegada,
-                                    proc->prioridade, 
+                                    proc->prioridade,
                                     proc->tempo_de_processador,
                                     proc->memoria,
                                     proc->impressoras,
@@ -142,7 +142,7 @@ TF *armazena(TF *fila, char *str){
 
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc){
     //escalona os processos que chegam para as filas de prontos
-    if(rec->memoria >= proc->memoria){
+    if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
             printf("Processo %d na fila de processos prontos tempo real", proc->nome);
@@ -151,7 +151,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             tu = ins_proc_ord(tu, proc);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
             printf("Processo %d na fila de processos prontos de usuário", proc->nome);
-        }    
+        }
         rec->memoria -= proc->memoria;
     }
     else{
@@ -161,7 +161,12 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
         }
         else{
             if(!proc->prioridade){
-                //chama escalonador de medio prazo
+                if(bloq){
+                    //escalonador medio bloq->bloqs
+                }
+                if(tu){
+                    //escalonador medio tu->susp
+                }
                 escalonadordeentrada(tfr, tu, susp, bloq, bloqs, rec, proc);
             }
             else{
@@ -170,7 +175,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             }
         }
     }
-    
+
     return;
 }
 
@@ -187,13 +192,91 @@ int na_entrada(TF* fila, int tempo){
     }
     else return 0;
 }
-Processo* entrada(TF* te, int tempo){
-    if(!te) return NULL;
-    Processo *entra = pop_processo(te);
+Processo* entrada(TF* fe, int tempo){
+    if(!fe) return NULL;
+    Processo *entra = pop_processo(fe);
     return entra;
+}
+//Gabriel
+void escalonadorCurtoReal(TF *pronto, Recursos *pc){
+    if(!pronto){
+        //checando para ver se tem algo errado
+        printf("Fila vazia.\n Checar inconsistencia\n");
+        return;
+    }
+    int numCPU;
+    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+        printf("Não existe CPU disponível\n");
+        //caso seja obrigatorio liberar esse espaço de memoria para usar o cpu criaremos um metodo que retorna o CPU liberado
+        return;
+    }
+    /*int menor = pronto->processo->tempo_de_chegada;
+    TF *aux1 = pronto;
+    // procurando o menor tempo de chegada
+    while (aux1){
+       if (aux1->processo->tempo_de_chegada>menor){
+            menor = aux1->processo->tempo_de_chegada;
+            aux1=aux1->prox;
+       }
+    }
+    // acessando o processo sem alterar nossa fila
+    // escolha arbitraria pq FIFO não tem critério de desempate explicito
+    TF *aux2 = pronto;
+    while (aux2->processo->tempo_de_chegada!=menor){
+        aux2 = aux2->prox;
+    }
+    if((aux2->processo->memoria)>(pc->memoria)){
+        printf("Deu erro\n");
+        return;
+    }
+    */
+
+    printf("Executa processo %d\n", pronto->processo->numero);
+    if(pc->cpu1==1)pc->cpu1--;
+    if(pc->cpu2==1)pc->cpu2--;
+    if(pc->cpu3==1)pc->cpu3--;
+    if(pc->cpu4==1)pc->cpu4--;
+    pc->memoria= (pc->memoria) - (pronto->processo->memoria);
+    pronto->processo->tempo_restante--;
+    if((pronto->processo->tempo_restante)==0){
+        printf("Processo %d terminou de executar em: %d", pronto->processo->numero, pc->momento);
+        pop_processo(pronto);
+        
+    }
+
 }
 
 
+<<<<<<< HEAD
 //     Processo *entra = copia_processo(te->processo);
 //     //colocar pop em te
 // }
+=======
+// AMANCO
+
+Recursos* cria_recursos(){
+    Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
+    novo->momento = 0;
+    novo->memoria = 8192;
+    novo->cpu1 = 1;
+    novo->cpu2 = 1;
+    novo->cpu3 = 1;
+    novo->cpu4 = 1;
+    novo->impressoras = 2;
+    novo->scanners = 1;
+    novo->modens = 1;
+    novo->cds = 2;
+    return novo;
+}
+
+int checa_disponibilidade(Recursos* recursos, Processo* p){
+    if(recursos->memoria >= p->memoria &&
+        recursos->impressoras >= p->impressoras &&
+        recursos->scanners >= p->scanners &&
+        recursos->cds >= p->cds &&
+        recursos->modens >= p->modens){
+            return 1;
+    }
+    return 0;
+}
+>>>>>>> 734953bdcde64b788d191a6c1e928a8fd0f5fd45

@@ -56,9 +56,12 @@ void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
-Processo* entrada(TF* te, int tempo);
+Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(Processo* proc);
 TF *armazena(TF *fila, char *str);
 int na_entrada(TF* fila, int tempo);
+void escalonadorCurtoReal(TF *pronto, Recursos *pc);
+Recursos* cria_recursos();
+int checa_disponibilidade(Recursos* recursos, Processo* p);
 
 #endif
