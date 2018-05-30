@@ -19,7 +19,7 @@ int main(){
 
 	fila_entrada = armazena(fila_entrada, str);
 
-	while(fila-entrada){
+	while(fila_entrada){
 		//	checar recursos-> momento == tempo de entrada do processo na frente da entrada
 		//com a função na_entrada
 
