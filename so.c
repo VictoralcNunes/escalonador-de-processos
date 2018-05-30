@@ -100,9 +100,8 @@ void imprime_fila(TF *fila){
         printf("CD's: %d \n", p->processo->cds);
 
         printf("------------------------------------------------\n");
-        if(p->prox != NULL){
-          imprime_fila(p->prox);
-        }
+        p = p->prox;
+        imprime_fila(p);
     }
 }
 
@@ -145,19 +144,19 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
-            printf("Processo %d na fila de processos prontos tempo real", proc->numero);
+            printf("Processo %d na fila de processos prontos tempo real", proc->nome);
         }
         else{
             tu = ins_proc_ord(tu, proc);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
-            printf("Processo %d na fila de processos prontos de usuário", proc->numero);
+            printf("Processo %d na fila de processos prontos de usuário", proc->nome);
         }
         rec->memoria -= proc->memoria;
     }
     else{
         if(!bloq && !tu){
             susp = ins_proc_ord(susp, proc);
-            printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+            printf("Processo %d na fila de processos prontos suspensos", proc->nome);
         }
         else{
             if(!proc->prioridade){
@@ -171,7 +170,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             }
             else{
                 susp = ins_proc_ord(susp, proc);
-                printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+                printf("Processo %d na fila de processos prontos suspensos", proc->nome);
             }
         }
     }
@@ -247,6 +246,30 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
 }
 
 
-//     Processo *entra = copia_processo(te->processo);
-//     //colocar pop em te
-// }
+// AMANCO
+
+Recursos* cria_recursos(){
+    Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
+    novo->momento = 0;
+    novo->memoria = 8192;
+    novo->cpu1 = 1;
+    novo->cpu2 = 1;
+    novo->cpu3 = 1;
+    novo->cpu4 = 1;
+    novo->impressoras = 2;
+    novo->scanners = 1;
+    novo->modens = 1;
+    novo->cds = 2;
+    return novo;
+}
+
+int checa_disponibilidade(Recursos* recursos, Processo* p){
+    if(recursos->memoria >= p->memoria &&
+        recursos->impressoras >= p->impressoras &&
+        recursos->scanners >= p->scanners &&
+        recursos->cds >= p->cds &&
+        recursos->modens >= p->modens){
+            return 1;
+    }
+    return 0;
+}
