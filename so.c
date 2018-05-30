@@ -144,19 +144,19 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
-            printf("Processo %d na fila de processos prontos tempo real", proc->nome);
+            printf("Processo %d na fila de processos prontos tempo real", proc->numero);
         }
         else{
             tu = ins_proc_ord(tu, proc);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
-            printf("Processo %d na fila de processos prontos de usuário", proc->nome);
+            printf("Processo %d na fila de processos prontos de usuário", proc->numero);
         }
         rec->memoria -= proc->memoria;
     }
     else{
         if(!bloq && !tu){
             susp = ins_proc_ord(susp, proc);
-            printf("Processo %d na fila de processos prontos suspensos", proc->nome);
+            printf("Processo %d na fila de processos prontos suspensos", proc->numero);
         }
         else{
             if(!proc->prioridade){
@@ -170,7 +170,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             }
             else{
                 susp = ins_proc_ord(susp, proc);
-                printf("Processo %d na fila de processos prontos suspensos", proc->nome);
+                printf("Processo %d na fila de processos prontos suspensos", proc->numero);
             }
         }
     }
@@ -252,7 +252,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
         if(aux->processo->prioridade<menorPrioridade){
             menorPrioridade = aux->processo->prioridade;
         }
-        aux = aux->proximo;
+        aux = aux->prox;
     }
     TF *prioritarios = cria_fila();
     aux = pronto;
@@ -301,7 +301,7 @@ return ;
 int alocarProc(Processo *proc,Recursos *pc){
     if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
         printf("Não tem CPU disponível\n");
-        return NULL;
+        return(0);
     }
     if(pc->cpu1==1)pc->cpu1--;
     if(pc->cpu2==1)pc->cpu2--;
@@ -311,7 +311,7 @@ int alocarProc(Processo *proc,Recursos *pc){
         if(pc->impressoras==0){
         //processo sem recurso disponivel
             printf("Recurso Indisponível\n");
-            return NULL;
+            return(1);
         }
         //processo tinha recurso disponivel
         pc->impressoras--;
@@ -321,31 +321,31 @@ int alocarProc(Processo *proc,Recursos *pc){
         if(pc->scanners==0){
         //processo sem recurso disponivel
             printf("Recurso Indisponível\n");
-            return NULL;
+            return(0);
         }
         //processo tinha recurso disponivel
         pc->scanners--;
-        return 1;
+        return(1);
     }
     if(proc->modens==1){
         if(pc->modens==0){
         //processo sem recurso disponivel
             printf("Recurso Indisponível\n");
-            return NULL;
+            return(0);
         }
         //processo tinha recurso disponivel
         pc->modens--;
-        return 1;
+        return(1);
     }
     if(proc->cds==1){
         if(pc->cds==0){
         //processo sem recurso disponivel
             printf("Recurso Indisponível\n");
-            return NULL;
+            return(1);
         }
         //processo tinha recurso disponivel
         pc->cds--;
-        return 1;
+        return(1);
     }
 }
 
@@ -366,7 +366,7 @@ Recursos* cria_recursos(){
     novo->scanners = 1;
     novo->modens = 1;
     novo->cds = 2;
-    return novo;
+    return(novo);
 }
 
 int checa_disponibilidade(Recursos* recursos, Processo* p){
@@ -375,7 +375,7 @@ int checa_disponibilidade(Recursos* recursos, Processo* p){
         recursos->scanners >= p->scanners &&
         recursos->cds >= p->cds &&
         recursos->modens >= p->modens){
-            return 1;
+            return(1);
     }
-    return 0;
+    return(0);
 }
