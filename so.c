@@ -160,7 +160,12 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
         }
         else{
             if(!proc->prioridade){
-                //chama escalonador de medio prazo
+                if(bloq){
+                    //escalonador medio bloq->bloqs
+                }
+                if(tu){
+                    //escalonador medio tu->susp
+                }  
                 escalonadordeentrada(tfr, tu, susp, bloq, bloqs, rec, proc);
             }
             else{
