@@ -388,9 +388,49 @@ void print_recursos(Recursos **recurso){
   printf("CPU1: %d\n", (*recurso)->cpu1);
   printf("CPU2: %d\n", (*recurso)->cpu2);
   printf("CPU3: %d\n", (*recurso)->cpu3);
-  printf("CP4: %d\n", (*recurso)->cpu4);
+  printf("CPU4: %d\n", (*recurso)->cpu4);
   printf("Impressoras: %d\n", (*recurso)->impressoras);
   printf("Scanners: %d\n", (*recurso)->scanners);
   printf("Modens: %d\n", (*recurso)->modens);
   printf("CD's: %d\n", (*recurso)->cds);
+}
+
+void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
+  if(!fe){
+    printf("Fila de Entrada: ");
+    while(fe != NULL){
+      printf("Processo %d", fe->processo->numero);
+      fe = fe->prox;
+    }
+  }if(!fpr){
+    printf("Fila Pronto Real: ");
+    while(fpr != NULL){
+      printf("Processo %d", fpr->processo->numero);
+      fpr = fpr->prox;
+    }
+  }if(!fpu){
+    printf("Fila Pronto Usuario: ");
+    while(fpu != NULL){
+      printf("Processo %d", fpu->processo->numero);
+      fpu = fpu->prox;
+    }
+  }if(!fps){
+    printf("Fila Pronto Suspensoo: ");
+    while(fps != NULL){
+      printf("Processo %d", fps->processo->numero);
+      fps = fps->prox;
+    }
+  }if(!fb){
+    printf("Fila Bloqueado: ");
+    while(fb != NULL){
+      printf("Processo %d", fb->processo->numero);
+      fb = fb->prox;
+    }
+  }if(!fbs){
+    printf("Fila Bloqueado Suspenso: ");
+    while(fe != NULL){
+      printf("Processo %d", fbs->processo->numero);
+      fbs = fbs->prox;
+    }
+  }
 }
