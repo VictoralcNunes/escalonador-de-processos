@@ -397,6 +397,7 @@ Recursos* cria_recursos(){
     return(novo);
 }
 int checa_disponibilidade(Recursos* recursos, Processo* p){
+    if(p==NULL) return (0);
     if(recursos->memoria >= p->memoria &&
         recursos->impressoras >= p->impressoras &&
         recursos->scanners >= p->scanners &&
