@@ -43,6 +43,14 @@ int main(){
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
 		//suspensos
 
+		if (checa_disponibilidade(recursos, fila_bloqueado->processo)) escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
+		if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo))	
+				escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
+
+
+
+
+
 		//	a cada troca de estado, printar a mudança
 		// print_estado(fila_entrada,
 		// 						fila_pronto_real,
