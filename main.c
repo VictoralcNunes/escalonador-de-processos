@@ -38,6 +38,7 @@ int main(){
 			}
 			fila_auxiliar = fila_auxiliar->prox;
 		}
+		if(procTempo)
         escalonadorCurtoReal(procTempo,recursos);
 		// Checar recursos->momento == processo->tempo_de_chegada na frente da entrada com a função na_entrada
 
