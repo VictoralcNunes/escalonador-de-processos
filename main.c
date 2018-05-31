@@ -66,7 +66,7 @@ int main(){
 
 
 
-
+		fila_pronto_real(TF *pronto, Recursos *pc);
 		//	a cada troca de estado, printar a mudança
 		print_estado(fila_entrada,
 								fila_pronto_real,

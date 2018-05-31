@@ -206,11 +206,8 @@ void escalonadorMedio(TF *origem, TF *fim){
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
 void escalonadorMedioVolta(TF *origem, TF *fim){
-<<<<<<< HEAD
     printf("entrei nesse método\n");
     if(origem==NULL||fim==NULL) return;
-=======
->>>>>>> dd3276c5f0f971bfb670fc620847781cd7e402b0
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
