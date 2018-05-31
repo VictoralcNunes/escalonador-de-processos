@@ -208,6 +208,10 @@ void escalonadorMedio(TF *origem, TF *fim){
 void escalonadorMedioVolta(TF *origem, TF *fim){
     printf("entrei nesse método\n");
     if(origem==NULL||fim==NULL) return;
+<<<<<<< HEAD
+=======
+
+>>>>>>> e43608f1354cfbb39804c63799cc8911acb1b39e
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
@@ -264,22 +268,41 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
 
     printf("Executa processo %d\n", pronto->processo->numero);
     if(pc->cpu1==1){pc->cpu1--;numCPU =1;}
+    else{
+<<<<<<< HEAD
     if(pc->cpu2==1){pc->cpu2--;numCPU =2;}
+    else{
     if(pc->cpu3==1){pc->cpu3--;numCPU =3;}
+
+    }
+
     if(pc->cpu4==1){pc->cpu4--;numCPU =4;}
+
+    }
+=======
+    	if(pc->cpu2==1){pc->cpu2--;numCPU =2;}
+    	else{
+    		if(pc->cpu3==1){pc->cpu3--;numCPU =3;}
+    		else{
+    			if(pc->cpu4==1){pc->cpu4--;numCPU =4;}
+    		}
+		}    
+	}
+>>>>>>> 003873b58686d96c0cf3ddbdd5533f61b5a4ad90
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
-    pronto->processo->tempo_restante--;
-    if((pronto->processo->tempo_restante)==0){
+    pronto->processo->tempo_de_processador--;
+    if(numCPU==1) pc->cpu1++;
+    if(numCPU ==2)pc ->cpu2++;
+    if(numCPU==3) pc ->cpu3++;
+    if(numCPU==4) pc->cpu4++;
+    if((pronto->processo->tempo_de_processador)==0){
         printf("Processo %d terminou de executar em: %d", pronto->processo->numero, pc->momento);
-        if(numCPU==1) pc->cpu1++;
-        if(numCPU ==2)pc ->cpu2++;
-        if(numCPU==3) pc ->cpu3++;
-        if(numCPU==4) pc->cpu4++;
+
         pop_processo(pronto);
 
     }
 
-}
+	}
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     int menorPrioridade = pronto->processo->prioridade;
     TF *aux= pronto;
