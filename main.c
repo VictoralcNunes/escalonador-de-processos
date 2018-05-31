@@ -55,12 +55,12 @@ int main(){
 
 
 		//	a cada troca de estado, printar a mudança
-		print_estado(fila_entrada,
-								fila_pronto_real,
-								fila_pronto_usuario,
-								fila_pronto_suspenso,
-								fila_bloqueado,
-								fila_bloqueado_suspenso);
+		// print_estado(fila_entrada,
+		// 						fila_pronto_real,
+		// 						fila_pronto_usuario,
+		// 						fila_pronto_suspenso,
+		// 						fila_bloqueado,
+		// 						fila_bloqueado_suspenso);
 		//	a cada momento, printar o estado dos recursos
 		//print_recursos(&recursos);
 		//printf("\nTecle Enter para continuar ou 0 para sair.\n");
