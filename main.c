@@ -22,7 +22,7 @@ int main(){
 	while((str[0] = getchar()) != '0'){
 		printf("--- TEMPO %d ---\n", timer);
 
-		//printf("Processo %d\nTempo de chegada: %d", fila_entrada->processo->numero, fila_entrada->processo->tempo_de_chegada);
+		// While para checar se o tempo_de_chegada é igual ao timer
 		while(fila_auxiliar != NULL){
 			if(fila_auxiliar->processo->tempo_de_chegada == timer){
 				printf("Processo %d\n", fila_auxiliar->processo->numero);
@@ -32,7 +32,7 @@ int main(){
 
 		// Checar recursos->momento == processo->tempo_de_chegada na frente da entrada com a função na_entrada
 
-		//	chamar escalonador de entrada dentro de um while que decrementa uma variável
+		// Chamar escalonador de entrada dentro de um while que decrementa uma variável
 		//que guardou a  o valor de na_entrada, fazendo um pop da entrada
 
 		//	chamar o escalonador de curto prazo. Ele faz a decisão de qual politica vai usar
@@ -48,9 +48,12 @@ int main(){
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
 		//suspensos
 
-		if (checa_disponibilidade(recursos, fila_bloqueado->processo)) escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
-		if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo))	
-				escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
+		// if (checa_disponibilidade(recursos, fila_bloqueado->processo)){
+		// 	escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
+		// }
+		// if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo)){
+		// 	escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
+		// }
 
 
 
@@ -74,5 +77,4 @@ int main(){
 	imprime_fila(fila_entrada);
 	libera_fila(fila_entrada);
 	return(0);
-
 }
