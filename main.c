@@ -17,10 +17,11 @@ int main(){
 	scanf("%s", str);
 	fila_entrada = armazena(fila_entrada, str);
 	fila_auxiliar = fila_entrada;
-
+    TF *procTempo = cria_fila();
 	int timer = 0;
 	while((str[0] = getchar()) != '0'){
 		printf("--- TEMPO %d ---\n", timer);
+
     TF *procTempo = cria_fila();
 		// While para checar se o tempo_de_chegada é igual ao timer
 		while(fila_auxiliar != NULL){
