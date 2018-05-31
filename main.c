@@ -41,7 +41,9 @@ int main(){
 		//	checar se um processo terminou e sem tem como passar um processor suspenso pra pronto
 
 		if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-			if (checa_disponibilidade(recursos, fila_pronto_suspenso) escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
+			if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){ 
+				escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
+			}		
 		}
 
 
