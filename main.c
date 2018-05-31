@@ -17,17 +17,17 @@ int main(){
 	scanf("%s", str);
 	fila_entrada = armazena(fila_entrada, str);
 	fila_auxiliar = fila_entrada;
-	
+
 	int timer = 0;
 	while((str[0] = getchar()) != '0'){
 		printf("--- TEMPO %d ---\n", timer);
 
-		printf("Processo %d\nTempo de chegada: %d", fila_entrada->processo->numero, fila_entrada->processo->tempo_de_chegada);
-		if(fila_entrada->processo->tempo_de_chegada == timer){
-			printf("chegou");
-		}
-		if (fila_entrada->prox != NULL) {
-			fila_entrada = fila_entrada->prox;
+		//printf("Processo %d\nTempo de chegada: %d", fila_entrada->processo->numero, fila_entrada->processo->tempo_de_chegada);
+		while(fila_auxiliar != NULL){
+			if(fila_auxiliar->processo->tempo_de_chegada == timer){
+				printf("Processo %d\n", fila_auxiliar->processo->numero);
+			}
+			fila_auxiliar = fila_auxiliar->prox;
 		}
 
 		// Checar recursos->momento == processo->tempo_de_chegada na frente da entrada com a função na_entrada
@@ -53,6 +53,7 @@ int main(){
 		//	a cada momento, printar o estado dos recursos
 		//print_recursos(&recursos);
 		//printf("\nTecle Enter para continuar ou 0 para sair.\n");
+		fila_auxiliar = fila_entrada;
 		recursos->momento++;
 		timer++;
 	}
