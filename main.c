@@ -43,24 +43,24 @@ int main(){
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
 		//suspensos
 
-		if (checa_disponibilidade(recursos, fila_bloqueado->processo)){
-			escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
-		}
-		if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo)){
-			escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
-		}
+		// if (checa_disponibilidade(recursos, fila_bloqueado->processo)){
+		// 	escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
+		// }
+		// if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo)){
+		// 	escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
+		// }
 
 
 
 
 
 		//	a cada troca de estado, printar a mudança
-		// print_estado(fila_entrada,
-		// 						fila_pronto_real,
-		// 						fila_pronto_usuario,
-		// 						fila_pronto_suspenso,
-		// 						fila_bloqueado,
-		// 						fila_bloqueado_suspenso);
+		print_estado(fila_entrada,
+								fila_pronto_real,
+								fila_pronto_usuario,
+								fila_pronto_suspenso,
+								fila_bloqueado,
+								fila_bloqueado_suspenso);
 		//	a cada momento, printar o estado dos recursos
 		//print_recursos(&recursos);
 		//printf("\nTecle Enter para continuar ou 0 para sair.\n");

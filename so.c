@@ -185,7 +185,6 @@ Processo* entrada(TF* fe, int tempo){
     return entra;
 }
 //Gabriel
-
 void escalonadorMedio(TF *origem, TF *fim){
     int maiorPrioridade = origem->processo->prioridade;
     TF* aux;
@@ -204,18 +203,16 @@ void escalonadorMedio(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
-
 void escalonadorMedioVolta(TF *origem, TF *fim){
-    if(origem==NULL) return;
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
-    while (aux!=NULL){
+    while (aux){
         if(aux->processo->prioridade<menorPrioridade) menorPrioridade = aux->processo->prioridade;
         aux = aux->prox;
     }
     aux = origem;
-    while(aux->processo->prioridade!=menorPrioridade&&aux!=NULL){
+    while(aux->processo->prioridade!=menorPrioridade){
             aux = aux->prox;
     }
     fim = ins_proc_ord(fim,pop_processo(aux));
@@ -434,19 +431,19 @@ void print_recursos(Recursos **recurso){
   printf("|----------------|\n");
 }
 void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
-  if(!fe){
+  if(!fe){ // fila_entrada
     printf("Fila de Entrada: ");
     while(fe != NULL){
       printf("Processo %d", fe->processo->numero);
       fe = fe->prox;
     }
-  }if(!fpr){
+  }if(!fpr){ // fila_pronto_real
     printf("Fila Pronto Real: ");
     while(fpr != NULL){
       printf("Processo %d ", fpr->processo->numero);
       fpr = fpr->prox;
     }
-  }if(!fpu){
+  }if(!fpu){ // fila_pronto_usuario
     printf("Fila Pronto Usuario: ");
     while(fpu != NULL){
       printf("Processo %d ", fpu->processo->numero);
