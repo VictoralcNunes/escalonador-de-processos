@@ -152,9 +152,11 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             if(!proc->prioridade){
                 if(bloq){
                     //escalonador medio bloq->bloqs
+                    escalonadorMedio(bloq,bloqs);
                 }
                 if(tu){
                     //escalonador medio tu->susp
+                    escalonadorMedio(tu,susp);
                 }
                 escalonadordeentrada(tfr, tu, susp, bloq, bloqs, rec, proc);
             }
@@ -204,6 +206,11 @@ void escalonadorMedio(TF *origem, TF *fim){
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
 void escalonadorMedioVolta(TF *origem, TF *fim){
+<<<<<<< HEAD
+    printf("entrei nesse método\n");
+    if(origem==NULL||fim==NULL) return;
+=======
+>>>>>>> dd3276c5f0f971bfb670fc620847781cd7e402b0
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
@@ -392,6 +399,7 @@ Recursos* cria_recursos(){
     return(novo);
 }
 int checa_disponibilidade(Recursos* recursos, Processo* p){
+    if(p==NULL) return (0);
     if(recursos->memoria >= p->memoria &&
         recursos->impressoras >= p->impressoras &&
         recursos->scanners >= p->scanners &&
