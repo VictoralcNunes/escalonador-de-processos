@@ -25,7 +25,6 @@ int main(){
 		// While para checar se o tempo_de_chegada é igual ao timer
 		while(fila_auxiliar != NULL){
 			if(fila_auxiliar->processo->tempo_de_chegada == timer){
-				printf("Processo %d CHEGOU\n", fila_auxiliar->processo->numero);
 				escalonadordeentrada(fila_pronto_real,
 														fila_pronto_usuario,
 														fila_pronto_suspenso,
@@ -47,11 +46,11 @@ int main(){
 
 		//	checar se um processo terminou e sem tem como passar um processor suspenso pra pronto
 
-		if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-			if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){ 
-				escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
-			}		
-		}
+		// if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
+		// 	if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
+		// 		escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
+		// 	}
+		// }
 
 
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
@@ -69,12 +68,12 @@ int main(){
 
 
 		//	a cada troca de estado, printar a mudança
-		// print_estado(fila_entrada,
-		// 						fila_pronto_real,
-		// 						fila_pronto_usuario,
-		// 						fila_pronto_suspenso,
-		// 						fila_bloqueado,
-		// 						fila_bloqueado_suspenso);
+		print_estado(fila_entrada,
+								fila_pronto_real,
+								fila_pronto_usuario,
+								fila_pronto_suspenso,
+								fila_bloqueado,
+								fila_bloqueado_suspenso);
 		//	a cada momento, printar o estado dos recursos
 		//print_recursos(&recursos);
 		//printf("\nTecle Enter para continuar ou 0 para sair.\n");
