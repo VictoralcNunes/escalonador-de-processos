@@ -206,7 +206,8 @@ void escalonadorMedio(TF *origem, TF *fim){
 }
 
 void escalonadorMedioVolta(TF *origem, TF *fim){
-    if(origem==NULL) return;
+    printf("entrei nesse método\n");
+    if(origem==NULL||fim==NULL) return;
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
