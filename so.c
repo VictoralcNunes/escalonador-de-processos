@@ -185,6 +185,7 @@ Processo* entrada(TF* fe, int tempo){
     return entra;
 }
 //Gabriel
+
 void escalonadorMedio(TF *origem, TF *fim){
     int maiorPrioridade = origem->processo->prioridade;
     TF* aux;
@@ -203,7 +204,9 @@ void escalonadorMedio(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
+
 void escalonadorMedioVolta(TF *origem, TF *fim){
+    if(!origem) return;
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
@@ -212,7 +215,7 @@ void escalonadorMedioVolta(TF *origem, TF *fim){
         aux = aux->prox;
     }
     aux = origem;
-    while(aux->processo->prioridade!=menorPrioridade){
+    while(aux->processo->prioridade!=menorPrioridade&&!aux){
             aux = aux->prox;
     }
     fim = ins_proc_ord(fim,pop_processo(aux));
