@@ -269,8 +269,8 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     if(pc->cpu3==1){pc->cpu3--;numCPU =3;}
     if(pc->cpu4==1){pc->cpu4--;numCPU =4;}
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
-    pronto->processo->tempo_restante--;
-    if((pronto->processo->tempo_restante)==0){
+    pronto->processo->tempo_de_processador--;
+    if((pronto->processo->tempo_de_processador)==0){
         printf("Processo %d terminou de executar em: %d", pronto->processo->numero, pc->momento);
         if(numCPU==1) pc->cpu1++;
         if(numCPU ==2)pc ->cpu2++;
