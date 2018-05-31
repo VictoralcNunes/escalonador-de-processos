@@ -25,7 +25,14 @@ int main(){
 		// While para checar se o tempo_de_chegada é igual ao timer
 		while(fila_auxiliar != NULL){
 			if(fila_auxiliar->processo->tempo_de_chegada == timer){
-				printf("Processo %d\n", fila_auxiliar->processo->numero);
+				printf("Processo %d CHEGOU\n", fila_auxiliar->processo->numero);
+				escalonadordeentrada(fila_pronto_real,
+														fila_pronto_usuario,
+														fila_pronto_suspenso,
+														fila_bloqueado,
+														fila_bloqueado_suspenso,
+														recursos,
+														fila_auxiliar->processo);
 			}
 			fila_auxiliar = fila_auxiliar->prox;
 		}

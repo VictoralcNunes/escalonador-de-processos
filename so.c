@@ -134,19 +134,19 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
-            printf("Processo %d na fila de processos prontos tempo real", proc->numero);
+            printf("Processo %d na fila de processos prontos tempo real\n", proc->numero);
         }
         else{
             tu = ins_proc_ord(tu, proc);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
-            printf("Processo %d na fila de processos prontos de usuário", proc->numero);
+            printf("Processo %d na fila de processos prontos de usuário\n", proc->numero);
         }
         rec->memoria -= proc->memoria;
     }
     else{
         if(!bloq && !tu){
             susp = ins_proc_ord(susp, proc);
-            printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+            printf("Processo %d na fila de processos prontos suspensos\n", proc->numero);
         }
         else{
             if(!proc->prioridade){
@@ -160,7 +160,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             }
             else{
                 susp = ins_proc_ord(susp, proc);
-                printf("Processo %d na fila de processos prontos suspensos", proc->numero);
+                printf("Processo %d na fila de processos prontos suspensos\n", proc->numero);
             }
         }
     }
@@ -435,40 +435,40 @@ void print_recursos(Recursos **recurso){
   printf("|----------------|\n");
 }
 void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
-  if(!fe){ // fila_entrada
-    printf("Fila de Entrada: ");
+  if(fe != NULL){ // fila_entrada
+    printf("\nFila de Entrada: Processo");
     while(fe != NULL){
-      printf("Processo %d", fe->processo->numero);
+      printf(" %d ", fe->processo->numero);
       fe = fe->prox;
     }
-  }if(!fpr){ // fila_pronto_real
-    printf("Fila Pronto Real: ");
+  }if(fpr != NULL){ // fila_pronto_real
+    printf("\nFila Pronto Real: Processo");
     while(fpr != NULL){
-      printf("Processo %d ", fpr->processo->numero);
+      printf(" %d ", fpr->processo->numero);
       fpr = fpr->prox;
     }
-  }if(!fpu){ // fila_pronto_usuario
-    printf("Fila Pronto Usuario: ");
+  }if(fpu != NULL){ // fila_pronto_usuario
+    printf("\nFila Pronto Usuario: Processo");
     while(fpu != NULL){
-      printf("Processo %d ", fpu->processo->numero);
+      printf(" %d ", fpu->processo->numero);
       fpu = fpu->prox;
     }
-  }if(!fps){
-    printf("Fila Pronto Suspensoo: ");
+  }if(fps != NULL){ // fila_pronto_suspenso
+    printf("\nFila Pronto Suspenso: Processo");
     while(fps != NULL){
-      printf("Processo %d ", fps->processo->numero);
+      printf(" %d ", fps->processo->numero);
       fps = fps->prox;
     }
-  }if(!fb){
-    printf("Fila Bloqueado: ");
+  }if(fb != NULL){ // fila_bloqueado
+    printf("\nFila Bloqueado: Processo");
     while(fb != NULL){
-      printf("Processo %d ", fb->processo->numero);
+      printf(" %d ", fb->processo->numero);
       fb = fb->prox;
     }
-  }if(!fbs){
-    printf("Fila Bloqueado Suspenso: ");
+  }if(fbs != NULL){ // fila_bloqueado_suspenso
+    printf("\nFila Bloqueado Suspenso: Processo");
     while(fe != NULL){
-      printf("Processo %d ", fbs->processo->numero);
+      printf(" %d ", fbs->processo->numero);
       fbs = fbs->prox;
     }
   }
