@@ -207,12 +207,10 @@ void escalonadorMedioVolta(TF *origem, TF *fim){
     int menorPrioridade = origem->processo->prioridade;
     TF* aux;
     aux = origem;
-<<<<<<< HEAD
     while (aux){
-=======
-    printf("%d\n",menorPrioridade);
+      printf("%d\n",menorPrioridade);
+    }
     while (aux!=NULL){
->>>>>>> 70f91746f182c4c230d3c2c66e1e137316027783
         if(aux->processo->prioridade<menorPrioridade) menorPrioridade = aux->processo->prioridade;
         aux = aux->prox;
     }
