@@ -152,9 +152,11 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
             if(!proc->prioridade){
                 if(bloq){
                     //escalonador medio bloq->bloqs
+                    escalonadorMedio(bloq,bloqs);
                 }
                 if(tu){
                     //escalonador medio tu->susp
+                    escalonadorMedio(tu,susp);
                 }
                 escalonadordeentrada(tfr, tu, susp, bloq, bloqs, rec, proc);
             }
