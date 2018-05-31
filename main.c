@@ -21,7 +21,7 @@ int main(){
 	int timer = 0;
 	while((str[0] = getchar()) != '0'){
 		printf("--- TEMPO %d ---\n", timer);
-        TF *procTempo = cria_fila();
+    TF *procTempo = cria_fila();
 		// While para checar se o tempo_de_chegada é igual ao timer
 		while(fila_auxiliar != NULL){
 			if(fila_auxiliar->processo->tempo_de_chegada == timer){
@@ -48,20 +48,18 @@ int main(){
 
 		//	checar se um processo terminou e sem tem como passar um processor suspenso pra pronto
 
-<<<<<<< HEAD
+
 		// if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
 		// 	if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
 		// 		escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
 		// 	}
 		// }
-=======
-		if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-			if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
-				escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
-			}
-		}
->>>>>>> d632312e6a0f20d3bbb9f495e7c47a92a729ad27
 
+		// if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
+		// 	if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
+		// 		escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
+		// 	}
+		// }
 
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
 		//suspensos
@@ -76,7 +74,6 @@ int main(){
 
 
 
-		fila_pronto_real(TF *pronto, Recursos *pc);
 		//	a cada troca de estado, printar a mudança
 		print_estado(fila_entrada,
 								fila_pronto_real,
