@@ -72,5 +72,6 @@ int checa_disponibilidade(Recursos* recursos, Processo* p);
 void print_processo(Processo *);
 void print_recursos(Recursos **);
 void print_estado(TF*, TF*, TF*, TF*, TF*, TF*);
+int filas_vazias(TF*, TF*, TF*, TF*, TF*, TF*);
 
 #endif
