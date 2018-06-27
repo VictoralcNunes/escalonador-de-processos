@@ -13,6 +13,7 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->modens = mod;
     processo->cds = cds;
     processo->tempo_restante = 0;
+    processo->cpuAloc = 0;
     return processo;
 }
 Processo* pop_processo(TF* fila){
@@ -233,18 +234,85 @@ void escalonadorMedioVolta(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
+void alocar(Processo *proc,Recursos *pc){
+    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+        printf("Como isso foi parar ai ???\n");
+        return;
+    } 
+    pc->memoria= (pc->memoria) - proc->memoria;
+    if(pc->cpu1==1){
+        pc->cpu1=0;
+        proc->cpuAloc =1;
+        return;
+    }
+    if(pc->cpu2==1){
+        pc->cpu2 = 0;
+        proc->cpuAloc =2;
+        return;
+    }
+    if(pc->cpu3==1){
+        pc->cpu3 = 0;
+        proc->cpuAloc =3;
+        return;
+    }
+    if(pc->cpu4==1){
+        pc->cpu4 = 0;
+        proc->cpuAloc =4;
+        return;
+    }
+    printf("Não é para cair nesse print, procurar bug\n");
+
+}
+void Exec(TF *fila,Recursos *pc){
+    if(!fila){
+        printf("Isso dará segfault procurar erro\n");
+        return;
+    }
+    printf("Executa processo %d\n", fila->processo->numero);
+    //pc->memoria= (pc->memoria) - (fila->processo->memoria);
+    fila->processo->tempo_de_processador--;
+    if((fila->processo->tempo_de_processador)==0){
+        int numAloc;
+        printf("Processo %d terminou de executar em: %d", fila->processo->numero, pc->momento);
+        //atualiza os recursos disponiveis e libera memoria
+        numAloc = fila->processo->cpuAloc;
+        pop_processo(fila);
+        if(numAloc==1){
+            pc->cpu1 = 1;
+            return;
+        }
+        if(numAloc==2){
+            pc->cpu2 = 1;
+            return;
+        }
+        if(numAloc==3){
+            pc->cpu1 = 3;
+            return;
+        }
+        if(numAloc==4){
+            pc->cpu1 = 4;
+            return;
+        }
+    }
+
+}
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
-    /*if(!pronto){
+    if(!pronto){
         //checando para ver se tem algo errado
         printf("Fila vazia.\n Checar inconsistencia\n");
         return;
-    }*/
-    int numCPU;
-    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+    }
+    if((pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0)||pc->memoria<pronto->processo->memoria){
         printf("Não existe CPU disponível\n");
         //caso seja obrigatorio liberar esse espaço de memoria para usar o cpu criaremos um metodo que retorna o CPU liberado
         return;
     }
+    if(pronto->processo->cpuAloc==0){
+        alocar(pronto->processo,pc);
+    }
+
+    //int numCPU;
+    
     /*int menor = pronto->processo->tempo_de_chegada;
     TF *aux1 = pronto;
     // procurando o menor tempo de chegada
@@ -264,46 +332,32 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
         printf("Deu erro\n");
         return;
     }
-    */
+    
 
     printf("Executa processo %d\n", pronto->processo->numero);
-    if(pc->cpu1==1){pc->cpu1--;numCPU =1;}
-    else{
-<<<<<<< HEAD
-    if(pc->cpu2==1){pc->cpu2--;numCPU =2;}
-    else{
-    if(pc->cpu3==1){pc->cpu3--;numCPU =3;}
-
-    }
-
-    if(pc->cpu4==1){pc->cpu4--;numCPU =4;}
-
-    }
-=======
-    	if(pc->cpu2==1){pc->cpu2--;numCPU =2;}
-    	else{
-    		if(pc->cpu3==1){pc->cpu3--;numCPU =3;}
-    		else{
-    			if(pc->cpu4==1){pc->cpu4--;numCPU =4;}
-    		}
-		}    
-	}
->>>>>>> 003873b58686d96c0cf3ddbdd5533f61b5a4ad90
     pc->memoria= (pc->memoria) - (pronto->processo->memoria);
     pronto->processo->tempo_de_processador--;
-    if(numCPU==1) pc->cpu1++;
-    if(numCPU ==2)pc ->cpu2++;
-    if(numCPU==3) pc ->cpu3++;
-    if(numCPU==4) pc->cpu4++;
     if((pronto->processo->tempo_de_processador)==0){
         printf("Processo %d terminou de executar em: %d", pronto->processo->numero, pc->momento);
-
-        pop_processo(pronto);
+        //atualiza os recursos disponiveis e libera memoria
+        fimDeExec(pronto,pc);
 
     }
-
+    */
+    Exec(pronto,pc);
+    //return;
 	}
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
+    if(!pronto){
+        //checando para ver se tem algo errado
+        printf("Fila vazia.\n Checar inconsistencia\n");
+        return;
+    }
+    if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
+        printf("Não existe CPU disponível\n");
+        //caso seja obrigatorio liberar esse espaço de memoria para usar o cpu criaremos um metodo que retorna o CPU liberado
+        return;
+    }
     int menorPrioridade = pronto->processo->prioridade;
     TF *aux= pronto;
     while (aux!=NULL){
@@ -320,8 +374,10 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
         }
         aux = aux->prox;
     }
+    //caso só tenha um prioritario( facil resolução)
     if(prioritarios->prox==NULL){
-        //Método para ver se aquele recurso está sendo usado
+        if(prioritarios->processo->numAloc==0) alocar(prioritarios->processo,pc);
+        /*Método para ver se aquele recurso está sendo usado
         if(alocarProc(prioritarios->processo,pc)){
             printf("O processo %d está sendo executado\n", prioritarios->processo->numero);
             prioritarios->processo->tempo_restante--;
@@ -329,7 +385,8 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
                     printf("Processo %d terminado\n", prioritarios->processo->numero);
                     pop_processo(prioritarios);
                 }
-        }
+        }*/
+    Exec(prioritarios,pc);    
     return;
     }
 
@@ -345,6 +402,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     while(aux->processo->tempo_restante!=menorTempo){
         aux= aux->prox;
     }
+    /*
     if(alocarProc(aux->processo,pc)){
             printf("O processo %d está sendo executado\n", aux->processo->numero);
             aux->processo->tempo_restante--;
@@ -353,7 +411,9 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
                     //pop_processo(prioritarios);
                 }
         }
-
+    */
+    if(aux->processo->numAloc==0) alocar(aux->processo,pc);
+    Exec(aux,pc);
     return ;
 }
 int alocarProc(Processo *proc,Recursos *pc){

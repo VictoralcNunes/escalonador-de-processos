@@ -14,6 +14,7 @@ typedef struct Processo{
     int modens;
     int cds;
     int tempo_restante;
+    int cpuAloc;
 }Processo;
 typedef struct Recursos{
     int momento;
@@ -52,6 +53,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
+
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
 Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(TF* fila);
@@ -62,6 +64,8 @@ void escalonadorMedioVolta(TF *origem, TF *fim);
 void escalonadorCurtoReal(TF *pronto, Recursos *pc);
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc);
 int alocarProc(Processo *proc,Recursos *pc);
+void alocar(Processo *proc,Recursos *pc);
+void Exec(TF *fila,Recursos *pc);
 Recursos* cria_recursos();
 int checa_disponibilidade(Recursos* recursos, Processo* p);
 //PEDRO
