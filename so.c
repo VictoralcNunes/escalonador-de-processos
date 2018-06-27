@@ -135,10 +135,12 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     if(checa_disponibilidade(rec, proc)){
         if(!proc->prioridade){
             tfr = ins_proc_ord(tfr, proc);
+            imprime_fila(tfr);
             printf("Processo %d na fila de processos prontos tempo real\n", proc->numero);
         }
         else{
             tu = ins_proc_ord(tu, proc);
+            imprime_fila(tu);
             //acho que os processos em tu devem entrar diferente já que ele usa feedback...
             printf("Processo %d na fila de processos prontos de usuário\n", proc->numero);
         }
@@ -147,6 +149,7 @@ void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recurs
     else{
         if(!bloq && !tu){
             susp = ins_proc_ord(susp, proc);
+            imprime_fila(susp);
             printf("Processo %d na fila de processos prontos suspensos\n", proc->numero);
         }
         else{
