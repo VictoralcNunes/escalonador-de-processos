@@ -53,7 +53,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
-
+*Processo removerProcesso(TF *entrada,int processoID)
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
 Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(TF* fila);
