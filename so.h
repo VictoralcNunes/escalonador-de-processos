@@ -16,6 +16,7 @@ typedef struct Processo{
     int tempo_restante;
     int cpuAloc;
 }Processo;
+
 typedef struct Recursos{
     int momento;
     int memoria;
@@ -28,10 +29,12 @@ typedef struct Recursos{
     int modens;
     int cds;
 }Recursos;
+
 typedef struct TipoFila{
     Processo *processo;
     struct TipoFila *prox;
 }TF;
+
 typedef struct NoTempo{
     int index;
     Processo *processo;
@@ -53,7 +56,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
-
+Processo* removerProcesso(TF *entrada,int processoID);
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
 Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(TF* fila);

@@ -188,6 +188,18 @@ Processo* entrada(TF* fe, int tempo){
     return entra;
 }
 //Gabriel
+Processo* removerProcesso(TF *entrada,int processoID){
+    TF *corredor = entrada;
+    TF *aux = NULL;
+    while(corredor->prox->processo->numero!=processoID && corredor->prox){
+        corredor = corredor->prox;
+    }
+    if(!corredor->prox){
+        printf("Processo not found\n");
+
+    }
+
+}
 void escalonadorMedio(TF *origem, TF *fim){
     int maiorPrioridade = origem->processo->prioridade;
     TF* aux;
@@ -264,12 +276,13 @@ void Exec(TF *fila,Recursos *pc){
         printf("Isso dará segfault procurar erro\n");
         return;
     }
-    printf("Executa processo %d\n", fila->processo->numero);
+    //printf("Executa processo %d\n", fila->processo->numero);
     //pc->memoria= (pc->memoria) - (fila->processo->memoria);
     fila->processo->tempo_de_processador--;
+    printf("Perde Processador\n");
     if((fila->processo->tempo_de_processador)==0){
         int numAloc;
-        printf("Processo %d terminou de executar em: %d", fila->processo->numero, pc->momento);
+        printf("Processo %d terminou de executar em: %d\n", fila->processo->numero, pc->momento);
         //atualiza os recursos disponiveis e libera memoria
         numAloc = fila->processo->cpuAloc;
         pop_processo(fila);
@@ -282,14 +295,15 @@ void Exec(TF *fila,Recursos *pc){
             return;
         }
         if(numAloc==3){
-            pc->cpu1 = 3;
+            pc->cpu3 = 1;
             return;
         }
         if(numAloc==4){
-            pc->cpu1 = 4;
+            pc->cpu4 = 1;
             return;
         }
     }
+    printf("Processo %d está sendo executado\n", fila->processo->numero );
 
 }
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
@@ -305,6 +319,7 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     }
     if(pronto->processo->cpuAloc==0){
         alocar(pronto->processo,pc);
+        
     }
 
     //int numCPU;
@@ -340,7 +355,9 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
 
     }
     */
+    printf("Ta executando\n");
     Exec(pronto,pc);
+
     //return;
 	}
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
@@ -412,6 +429,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     Exec(aux,pc);
     return ;
 }
+
 int alocarProc(Processo *proc,Recursos *pc){
     if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
         printf("Não tem CPU disponível\n");
