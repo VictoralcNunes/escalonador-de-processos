@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "so.h"
-
+//
 Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, int cds){
     Processo* processo = (Processo*)malloc(sizeof(Processo));
     processo->tempo_de_chegada = tc;
@@ -16,6 +16,7 @@ Processo* cria_processo(int tc, int p, int tp, int mem, int i, int sc, int mod, 
     processo->cpuAloc = 0;
     return processo;
 }
+//
 Processo* pop_processo(TF* fila){
     if(!fila) return NULL;
     TF* aux = fila, *aux2;
@@ -35,19 +36,23 @@ Processo* pop_processo(TF* fila){
     free(aux);
     return copia;
 }
+//
 void mata_processo(Processo *processo){
     free(processo);
     return;
 }
+//
 TF* cria_fila(){
     return NULL;
 }
+//
 TF* cria_elemento(Processo* processo){
     TF* novo = (TF*)malloc(sizeof(TF));
     novo->prox = NULL;
     novo->processo = processo;
     return novo;
 }
+//
 TF* ins_proc_ord(TF* fila, Processo* processo){
     if(!fila){ //se a fila está vazia
         return cria_elemento(processo);
@@ -79,6 +84,7 @@ TF* ins_proc_ord(TF* fila, Processo* processo){
         }
     }
 }
+//
 void imprime_fila(TF *fila){
     if((fila) == NULL){
         printf("Fim\n");
@@ -98,6 +104,7 @@ void imprime_fila(TF *fila){
         imprime_fila(p);
     }
 }
+//
 void libera_fila(TF *fila){
     if(!fila) return;
     else{
@@ -105,6 +112,7 @@ void libera_fila(TF *fila){
         libera_fila(fila->prox);
     }
 }
+//
 TF *armazena(TF *fila, char *str){
     int numproc = 0;
     Processo *processo = NULL;
@@ -130,6 +138,7 @@ TF *armazena(TF *fila, char *str){
     fclose(file);
     return(fila);
 }
+//
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc){
     //escalona os processos que chegam para as filas de prontos
     if(checa_disponibilidade(rec, proc)){
@@ -185,24 +194,7 @@ int na_entrada(TF* fila, int tempo){
     }
     else return 0;
 }
-Processo* entrada(TF* fe, int tempo){
-    if(!fe) return NULL;
-    Processo *entra = pop_processo(fe);
-    return entra;
-}
-//Gabriel
-Processo* removerProcesso(TF *entrada,int processoID){
-    TF *corredor = entrada;
-    TF *aux = NULL;
-    while(corredor->prox->processo->numero!=processoID && corredor->prox){
-        corredor = corredor->prox;
-    }
-    if(!corredor->prox){
-        printf("Processo not found\n");
-
-    }
-
-}
+//
 void escalonadorMedio(TF *origem, TF *fim){
     int maiorPrioridade = origem->processo->prioridade;
     TF* aux;
@@ -221,6 +213,7 @@ void escalonadorMedio(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
+//
 void escalonadorMedioVolta(TF *origem, TF *fim){
     printf("entrei nesse método\n");
     if(origem==NULL||fim==NULL) return;
@@ -245,6 +238,7 @@ void escalonadorMedioVolta(TF *origem, TF *fim){
 
     //fim = ins_proc_ord(fim,transferidor->processo);
 }
+//
 void alocar(Processo *proc,Recursos *pc){
     if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
         printf("Como isso foi parar ai ???\n");
@@ -274,6 +268,7 @@ void alocar(Processo *proc,Recursos *pc){
     printf("Não é para cair nesse print, procurar bug\n");
 
 }
+//
 void Exec(TF *fila,Recursos *pc){
     if(!fila){
         printf("Isso dará segfault procurar erro\n");
@@ -291,28 +286,33 @@ void Exec(TF *fila,Recursos *pc){
         pop_processo(fila);
         if(numAloc==1){
             pc->cpu1 = 1;
+            printf("debug1");
             return;
         }
         if(numAloc==2){
             pc->cpu2 = 1;
+            printf("debug2");
             return;
         }
         if(numAloc==3){
             pc->cpu3 = 1;
+            printf("debug3");
             return;
         }
         if(numAloc==4){
             pc->cpu4 = 1;
+            printf("debug4");
             return;
         }
     }
     printf("Processo %d está sendo executado\n", fila->processo->numero );
 
 }
+//
 void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     if(!pronto){
         //checando para ver se tem algo errado
-        printf("Fila vazia.\n Checar inconsistencia\n");
+        printf("Fila vazia.\n");
         return;
     }
     if((pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0)||pc->memoria<pronto->processo->memoria){
@@ -362,7 +362,8 @@ void escalonadorCurtoReal(TF *pronto, Recursos *pc){
     Exec(pronto,pc);
 
     //return;
-	}
+}
+//
 void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     if(!pronto){
         //checando para ver se tem algo errado
@@ -432,7 +433,7 @@ void escalonadorCurtoFeedback(TF *pronto,Recursos *pc){
     Exec(aux,pc);
     return ;
 }
-
+//
 int alocarProc(Processo *proc,Recursos *pc){
     if(pc->cpu1+pc->cpu2+pc->cpu3+pc->cpu4==0){
         printf("Não tem CPU disponível\n");
@@ -483,8 +484,7 @@ int alocarProc(Processo *proc,Recursos *pc){
         return(1);
     }
 }
-
-// AMANCO
+//
 Recursos* cria_recursos(){
     Recursos* novo = (Recursos*)malloc(sizeof(Recursos));
     novo->momento = 0;
@@ -499,6 +499,7 @@ Recursos* cria_recursos(){
     novo->cds = 2;
     return(novo);
 }
+//
 int checa_disponibilidade(Recursos* recursos, Processo* p){
     if(p==NULL) return (0);
     if(recursos->memoria >= p->memoria &&
@@ -510,8 +511,7 @@ int checa_disponibilidade(Recursos* recursos, Processo* p){
     }
     return(0);
 }
-
-// PEDRO
+//
 void print_processo(Processo *processo){
   if(processo){
     printf("\n");
@@ -529,6 +529,7 @@ void print_processo(Processo *processo){
     printf("|-------------------------|\n");
   }
 }
+//
 void print_recursos(Recursos **recurso){
   printf("\n");
   printf("|--- RECURSOS ---|\n");
@@ -543,6 +544,7 @@ void print_recursos(Recursos **recurso){
   printf("| CD's: %d        |\n", (*recurso)->cds);
   printf("|----------------|\n");
 }
+//
 void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
   TF* printa = NULL;
   if(fe != NULL){ // fila_entrada
@@ -595,6 +597,7 @@ void print_estado(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
     }
   }
 }
+//
 int filas_vazias(TF* fe,TF* fpr,TF *fpu,TF* fps,TF* fb,TF* fbs){
     if(!fe && !fpr && !fpu && !fps && !fb && !fbs){
         return 1;

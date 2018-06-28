@@ -56,9 +56,7 @@ TF* ins_proc_ord(TF *fila, Processo *processo);
 void imprime_fila(TF *fila);
 void libera_fila(TF *fila);
 
-Processo* removerProcesso(TF *entrada,int processoID);
 void escalonadordeentrada(TF* tfr, TF* tu, TF* susp, TF* bloq, TF* bloqs, Recursos* rec, Processo* proc);
-Processo* entrada(TF* fe, int tempo);
 Processo* pop_processo(TF* fila);
 TF *armazena(TF *fila, char *str);
 int na_entrada(TF* fila, int tempo);
@@ -71,7 +69,6 @@ void alocar(Processo *proc,Recursos *pc);
 void Exec(TF *fila,Recursos *pc);
 Recursos* cria_recursos();
 int checa_disponibilidade(Recursos* recursos, Processo* p);
-//PEDRO
 void print_processo(Processo *);
 void print_recursos(Recursos **);
 void print_estado(TF*, TF*, TF*, TF*, TF*, TF*);

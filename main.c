@@ -37,8 +37,7 @@ int main(){
 			}
 			fila_auxiliar = fila_auxiliar->prox;
 		}
-		//if(procTempo)
-        escalonadorCurtoReal(procTempo,recursos);
+		escalonadorCurtoReal(procTempo,recursos);
 		// Checar recursos->momento == processo->tempo_de_chegada na frente da entrada com a função na_entrada
 
 		// Chamar escalonador de entrada dentro de um while que decrementa uma variável
@@ -50,37 +49,8 @@ int main(){
 		//	checar se um processo terminou e sem tem como passar um processor suspenso pra pronto
 
 
-
-		// if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-		// 	if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
-		// 		escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
-		// 	}
-		// }
-
-		// if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-		// 	if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
-		// 		escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
-		// 	}
-		// }
-
-/*
-		if (fila_pronto_real->processo->tempo_restante==0 || fila_pronto_usuario->processo->tempo_restante==0){
-			if (checa_disponibilidade(recursos, fila_pronto_suspenso->processo)){
-				escalonadorMedioVolta (fila_pronto_suspenso, fila_pronto_usuario);
-			}
-		}
-*/
-
 		//	checar se bloqueados e bloqueados suspensos podem voltar a estarem prontos ou prontos
 		//suspensos
-
-		// if (checa_disponibilidade(recursos, fila_bloqueado->processo)){
-		// 	escalonadorMedioVolta(fila_bloqueado, fila_pronto_usuario);
-		// }
-		// if (checa_disponibilidade(recursos, fila_bloqueado_suspenso->processo)){
-		// 	escalonadorMedioVolta(fila_bloqueado_suspenso, fila_pronto_suspenso);
-		// }
-
 
 
 
@@ -92,8 +62,6 @@ int main(){
 								fila_bloqueado,
 								fila_bloqueado_suspenso);
 		//	a cada momento, printar o estado dos recursos
-		//print_recursos(&recursos);
-		//printf("\nTecle Enter para continuar ou 0 para sair.\n");
 		fila_auxiliar = fila_entrada;
 		recursos->momento++;
 		if(filas_vazias(fila_entrada, 
